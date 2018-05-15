@@ -66,11 +66,5 @@ gem 'omniauth-google-oauth2'
 gem 'carrierwave', '~> 1.0'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
-<<<<<<< HEAD
+
 gem 'omniauth-facebook'
-
-=======
-
-
-# Testing the pushing feature
->>>>>>> 647635175a929faf4034a55b6e736a538ba81ac5
