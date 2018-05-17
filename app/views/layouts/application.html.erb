@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Teachnlive</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <div id="header">
+    <% if signed_in? -%>
+      <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+      <% if current_user.teacher? || current_user.admin? %>
+        <%= link_to t(".subject"), subjects_path %>
+      <% end %>
+       <!--  <% if current_user.admin? %>
+          <%= link_to t(".subject"), subjects_show_path %>
+        <% end %> -->
+    <% else -%>
+      <%= link_to t(".sign_in"), sign_in_path %><br>
+      <%= link_to "Sign in with Google", "/auth/google_oauth2" %>
+    <% end -%>
+  </div>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <div id="flash">
+    <% flash.each do |key, value| -%>
+      <div id="flash_<%= key %>"><%=h value %></div>
+    <% end %>
+  </div>
 
-  <body>
-    <%= yield %>
-  </body>
+  <%= yield %>
+</body>
 </html>
