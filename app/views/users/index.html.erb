@@ -1,0 +1,20 @@
+<h1>Welcome</h1>
+
+<h2>Student Attendance</h2>
+
+<table>
+	<tr>
+		<th>Subject Name</th>
+		<th>Student Attendee</th>
+	</tr>
+
+	<%= @subject.each do |@sub| %>
+	<tr>
+		<td><%= @sub.name %></td>
+		<td><%= @sub.attendance.count(value: true) %></td>
+	</tr>
+		
+
+
+
+</table>
