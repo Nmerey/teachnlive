@@ -8,6 +8,12 @@
   <div id="header">
     <% if signed_in? -%>
       <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
+      <% if current_user.teacher? || current_user.admin? %>
+        <%= link_to t(".subject"), subjects_path %>
+      <% end %>
+       <!--  <% if current_user.admin? %>
+          <%= link_to t(".subject"), subjects_show_path %>
+        <% end %> -->
     <% else -%>
       <%= link_to t(".sign_in"), sign_in_path %><br>
       <%= link_to "Sign in with Google", "/auth/google_oauth2" %>

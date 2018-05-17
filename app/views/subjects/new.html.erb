@@ -1,0 +1,16 @@
+<%= form_for @subject do |s| %>
+
+  <div class="field">
+    <%= s.label :name %>
+    <%= s.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= s.label :user_id %>
+    <%= s.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= s.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<h1>Attendance</h1>
+
+<table>
+	<th>Subject Name</th>
+	<tr><%= @subject.name %></tr>
+
+	<th>Attendance</th>
+	<tr><%= @subject.attendance.count(value: true) %></tr>
+
+</table>
