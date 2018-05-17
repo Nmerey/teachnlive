@@ -5,11 +5,7 @@
   <title>GeoLocation</title>
 
   <style>
-    html, body, #map {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
+    
   </style>
 </head>
 <body>
@@ -17,125 +13,77 @@
 
   <a href="/attending_authentication">Attends</a>
   <div id="map" style="display: none"></div>
-
   <button onclick="getLocation()">Try It</button>
-  
+  <br>
+  <button onclick="generateQrCode()">Get Qr Code</button>
+  <a href="/qr_code">Qr with no AJAX</a>
   <h2 id="demo"></h2>
+  <h2 id="demo2"></h2>
 
 
-  <script>
-    var x = document.getElementById("demo");
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else { 
-            x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-    }
-
-    function showPosition(position) {
-        console.log(position.coords.latitude,position.coords.longitude)
-        x.innerHTML = "Latitude: " + position.coords.latitude + 
-        "<br>Longitude: " + position.coords.longitude;
-    }
-  </script>
-
- <!--  <script>
-    // Note: This example requires that you consent to location sharing when
-    // prompted by your browser. If you see the error "The Geolocation service
-    // failed.", it means you probably did not give permission for the browser to
-    // locate you.
-    var map, infoWindow;
-    function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
-        zoom: 6
-      });
-      infoWindow = new google.maps.InfoWindow;
-
-      // Try HTML5 geolocation.
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          console.log(pos)
-        }, function() {
-          handleLocationError(true, infoWindow, map.getCenter());
-        });
-      }
-    }
-
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      infoWindow.setPosition(pos);
-      infoWindow.setContent(browserHasGeolocation ?
-                            'Error: The Geolocation service failed.' :
-                            'Error: Your browser doesn\'t support geolocation.');
-      infoWindow.open(map);
-    }
-  </script> -->
-
-  <!-- <script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
-      // var map, infoWindow;
-      // function initMap() {
-      //   map = new google.maps.Map(document.getElementById('map'), {
-      //     center: {lat: 3.0327151999999997, lng: 101.618802},
-      //     zoom: 20
-      //   });
-
-      //   var marker = new google.maps.Marker({
-      //     position: {lat: 3.0327151999999997, lng: 101.618802},
-      //     map: map
-      //   });
-
-      //   infoWindow = new google.maps.InfoWindow;
-
-      // }
-      x = document.getElementById('try')
+<!-- script to take the user location and paste it on the page -->
+  <!--   <script>
+      var x = document.getElementById("demo");
+      var y = document.getElementById("demo2");
+      var lat,lng
       function getLocation() {
           if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(showPosition);
-          } else {
+              navigator.geolocation.getCurrentPosition(getStudentPosition,handleError,option);
+          } else { 
               x.innerHTML = "Geolocation is not supported by this browser.";
           }
       }
 
-      function showPosition(position) {
-          x.innerHTML = "Latitude: " + position.coords.latitude +
-          "<br>Longitude: " + position.coords.longitude;
+      var option = {
+        enableHighAccuracy: true
+      }
+      
+      function getStudentPosition(position) {
+          x.innerHTML = position.coords.latitude 
+          y.innerHTML = position.coords.longitude
+          sendToServer()
+      }
+
+      function handleError() {
+        console.log('permission denied')
+        x.innerHTML = "Permission Denied"
       }
     </script>
- -->
-
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
-
-<!--   <script>
-    // url = 'https://maps.googleapis.com/maps/api/geocode/outputFormat?json'
-    // console.log("hi")
-    // $.ajax({
-    //         url: url,
-    //         crossOrigin: false,
-    //         type: 'POST',
-    //         dataType: "json",
-    //         success: function(response){
-    //           console.log(response)
-    //         }
-    //       });
-      $.getJSON('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDKZ7QLmWg8s0acRjoPd9iw4mk_Eso44Z0', function(response) { 
-          console.log('ji')
-          console.log(response)
-          // var loc = response.loc.split(',');
-          // var coords = {
-          //     latitude: loc[0],
-          //     longitude: loc[1]
-          // };
+   -->
+  <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+  </script>
+  
+  <script>
+    function generateQrCode() {
+      $.ajax({
+        url: "/qr_code",
+        type: "GET",
+        dataType: "HTML",
+        success: function(qr_code){
+          console.log(qr_code)
+        }
       });
-  </script> -->
+    }
+  </script>
+
+<!-- script to pass the coordinate to the server side using ajax -->
+   <!--  <script>
+      function sendToServer() {
+        var lat = $("#demo").text()
+        var lng = $("#demo2").text()
+        console.log(lat,lng)
+        $.ajax({
+          url: "/attending_authentication",
+          type: "GET",
+          data: {lat: lat, lng: lng}, 
+          dataType: "JSON"
+
+        });
+      }
+    </script>
+   -->
 </body>
 </html>
