@@ -1,0 +1,21 @@
+
+
+<h1>Welcome</h1>
+
+<h2>Student Attendance</h2>
+
+<table>
+	<tr>
+		<th>Subject Name</th>
+		<th>Student Attendee</th>
+	</tr>
+
+	<%= @subject.each do |sub| %>
+	<tr>
+		<td><%= sub.name %></td>
+		<td><%= @attendance.count(condition: "student_id = subs.student_id AND table.attendance ="true"") %></td>
+	</tr>
+	<% end -%>
+
+
+</table>

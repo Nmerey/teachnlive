@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_17_112200) do
+ActiveRecord::Schema.define(version: 2018_05_17_163900) do
+
+  create_table "attendance", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.boolean "present", default: false
+    t.integer "subject_id"
+    t.integer "student_id"
+    t.index ["student_id"], name: "index_attendance_on_student_id"
+    t.index ["subject_id"], name: "index_attendance_on_subject_id"
+  end
 
   create_table "authentications", force: :cascade do |t|
     t.string "uid"
@@ -35,7 +46,6 @@ ActiveRecord::Schema.define(version: 2018_05_17_112200) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.boolean "attendance", default: false
     t.integer "user_id"
     t.integer "student_id"
     t.index ["student_id"], name: "index_subjects_on_student_id"

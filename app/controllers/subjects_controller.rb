@@ -22,6 +22,15 @@ class SubjectsController < ApplicationController
       redirect_to '/'
     end
 
+    def calculate_attendance
+    	if current_user.roles == "teacher"
+    		@subject = current_user.subject_id
+    	elsif current_user.roles = "admin"
+    		@subject = Subject.all
+    	end
+    	@attendance = Attendance.where(subject )
+    end
+
  	private
 
  	def set_subject
