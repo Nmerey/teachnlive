@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       only: [:create, :edit, :update]
   end
 
+  get "/qr_code" => "home#generate_qr_code"
   get "/attending_authentication" => "home#student_attend"
   get "/sign_in" => "clearance/sessions#new", as: "sign_in"
   delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"

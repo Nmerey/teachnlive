@@ -62,9 +62,8 @@ gem 'omniauth-google-oauth2'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.1.0'
 gem "figaro"
-gem 'omniauth-google-oauth2'
 gem 'carrierwave', '~> 1.0'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
-
 gem 'omniauth-facebook'
+gem "rqrcode"
