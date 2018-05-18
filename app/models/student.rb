@@ -1,4 +1,5 @@
 class Student < ApplicationRecord
+
 	has_many :subjects
 	has_many :authentications, dependent: :destroy
 
@@ -32,3 +33,4 @@ class Student < ApplicationRecord
 		return x.token unless x.nil?
 	end
 end
+

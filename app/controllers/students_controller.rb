@@ -7,8 +7,6 @@ class StudentsController < ApplicationController
 		@student = Student.new(first_name: params["student"]["first_name"], last_name: params["student"]["last_name"], phone: params["student"]["phone"], email: params["student"]["email"])
 		@student.save
 		redirect_to '/'
-	end
-
 	def create_from_omniauth
 	    auth_hash = request.env["omniauth.auth"]
 	    authentication = Authentication.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"]) ||  Authentication.create_with_omniauth(auth_hash)
@@ -45,4 +43,6 @@ class StudentsController < ApplicationController
 	  	
 	  	redirect_to '/'
 	end
+
+
 end
