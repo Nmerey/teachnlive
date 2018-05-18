@@ -1,19 +1,32 @@
 class User < ApplicationRecord
  has_many :subjects
- has_many :authentications, dependent: :destroy
+
+ # has_many :authentications, dependent: :destroy
+
   include Clearance::User
 
   enum roles: [:teacher, :admin]
 
-  def self.create_with_auth_and_hash(authentication, auth_hash)
-   user = self.create!(
-     name: auth_hash["info"]["name"],
-     email: auth_hash["info"]["email"],
-     password: SecureRandom.hex(10)
-   )
-   user.authentications << authentication
-   return user
- end
+
+ #  def self.create_with_auth_and_hash(authentication, auth_hash)
+ #   p "====================================="
+ #   p "in the user model"
+ #   p "in the create create_with_auth_and_hash"
+ #   p "====================================="
+ #   user = self.create!(
+ #     name: auth_hash["info"]["name"],
+ #     email: auth_hash["info"]["email"],
+ #     password: SecureRandom.hex(10),
+ #     roles: 1
+ #   )
+ #   p "--------------------------------------"
+ #   p user
+ #   p authentication
+ #   p "--------------------------------------"
+ #   user.authentications << authentication
+ #   return user
+ # end
+
 
  # grab google to access google for user data
  def google_token
