@@ -1,3 +1,5 @@
+
+
 <h1>Welcome</h1>
 
 <h2>Student Attendance</h2>
@@ -8,13 +10,12 @@
 		<th>Student Attendee</th>
 	</tr>
 
-	<%= @subject.each do |@sub| %>
+	<% @lecture.each do |lec| %>
 	<tr>
-		<td><%= @sub.name %></td>
-		<td><%= @sub.attendance.count(value: true) %></td>
+		<td><%= lec.name %></td>
+		<td><%= Attendance.attendance_count(lec.id) %></td>
 	</tr>
-		
-
+	<% end -%>
 
 
 </table>

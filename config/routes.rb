@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
-  # resources :subjects
+  resources :lectures
   resources :users, controller: "clearance/users", only: [:create] do
     resource :password,
       controller: "clearance/passwords",
@@ -17,8 +17,6 @@ Rails.application.routes.draw do
   
   root 'home#index'
   get "/auth/:provider/callback" => "sessions#create_from_omniauth"
-  get "/subjects" => "subjects#new", as: "subject"
-  post "/subjects" => "subjects#create"
-  get "/users/index"
+
 
 end
