@@ -1,5 +1,6 @@
 class Authentication < ApplicationRecord
-  belongs_to :user
+  # belongs_to :user
+  belongs_to :student
 
   def self.create_with_omniauth(auth_hash)
     self.new(
