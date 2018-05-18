@@ -31,5 +31,4 @@ class Student < ApplicationRecord
 		x = self.authentications.find_by(provider: 'google_oauth2')
 		return x.token unless x.nil?
 	end
-
 end

@@ -1,9 +1,9 @@
 class User < ApplicationRecord
  has_many :subjects
  # has_many :authentications, dependent: :destroy
- #  include Clearance::User
+  include Clearance::User
 
- #  enum roles: [:teacher, :admin]
+  enum roles: [:teacher, :admin]
 
  #  def self.create_with_auth_and_hash(authentication, auth_hash)
  #   p "====================================="
@@ -13,7 +13,7 @@ class User < ApplicationRecord
  #   user = self.create!(
  #     name: auth_hash["info"]["name"],
  #     email: auth_hash["info"]["email"],
- #       password: SecureRandom.hex(10),
+ #     password: SecureRandom.hex(10),
  #     roles: 1
  #   )
  #   p "--------------------------------------"
