@@ -1,0 +1,21 @@
+
+
+<h1>Welcome</h1>
+
+<h2>Student Attendance</h2>
+
+<table>
+	<tr>
+		<th>Subject Name</th>
+		<th>Student Attendee</th>
+	</tr>
+
+	<% @lecture.each do |lec| %>
+	<tr>
+		<td><%= lec.name %></td>
+		<td><%= Attendance.attendance_count(lec.id) %></td>
+	</tr>
+	<% end -%>
+
+
+</table>

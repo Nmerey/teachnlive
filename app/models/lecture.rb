@@ -1,4 +1,4 @@
-class Subject < ApplicationRecord
+class Lecture < ApplicationRecord
 	belongs_to :user
 	# belongs_to :student
 	

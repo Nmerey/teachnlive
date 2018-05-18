@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_17_163900) do
+ActiveRecord::Schema.define(version: 2018_05_18_110802) do
 
-  create_table "attendance", force: :cascade do |t|
+  create_table "attendances", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "date"
     t.boolean "present", default: false
-    t.integer "subject_id"
+    t.integer "lecture_id"
     t.integer "student_id"
-    t.index ["student_id"], name: "index_attendance_on_student_id"
-    t.index ["subject_id"], name: "index_attendance_on_subject_id"
+    t.index ["lecture_id"], name: "index_attendances_on_lecture_id"
+    t.index ["student_id"], name: "index_attendances_on_student_id"
   end
 
   create_table "authentications", force: :cascade do |t|
@@ -33,6 +33,19 @@ ActiveRecord::Schema.define(version: 2018_05_17_163900) do
     t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
+  create_table "lectures", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.integer "user_id"
+    t.integer "student_id"
+    t.string "subject_name"
+    t.date "start_date"
+    t.date "end_date"
+    t.index ["student_id"], name: "index_lectures_on_student_id"
+    t.index ["user_id"], name: "index_lectures_on_user_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -40,16 +53,6 @@ ActiveRecord::Schema.define(version: 2018_05_17_163900) do
     t.string "last_name"
     t.string "phone"
     t.string "email", null: false
-  end
-
-  create_table "subjects", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name"
-    t.integer "user_id"
-    t.integer "student_id"
-    t.index ["student_id"], name: "index_subjects_on_student_id"
-    t.index ["user_id"], name: "index_subjects_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
