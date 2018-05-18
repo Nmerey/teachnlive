@@ -7,8 +7,9 @@ class StudentsController < ApplicationController
 		@student = Student.new(first_name: params["student"]["first_name"], last_name: params["student"]["last_name"], phone: params["student"]["phone"], email: params["student"]["email"])
 		@student.save
 		redirect_to '/'
-
 	end
 
-
+	def student_attendance_confirmation(hash)
+		@old_token = 
+	end
 end
