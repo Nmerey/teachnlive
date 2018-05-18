@@ -8,7 +8,6 @@ class SessionsController < Clearance::SessionsController
   # if: previously already logged in with OAuth
   if authentication.student
     student = authentication.student
-    
     authentication.update_token(auth_hash)
     @next = root_url
     @notice = "Signed in!"
@@ -20,10 +19,11 @@ class SessionsController < Clearance::SessionsController
     # user = User.create_with_auth_and_hash(authentication, auth_hash)
     student = Student.create_with_auth_and_hash(authentication, auth_hash)
     # you are expected to have a path that leads to a page for editing user details
+    confirmation_for_student = student_attendance_confirmation(student)
     @notice = "Student created. Please confirm or edit details"
   end
 
-  sign_in(user)
+  # sign_in(user)
   redirect_to @next, :notice => @notice
   end
 end
