@@ -3,6 +3,4 @@ class Attendance < ApplicationRecord
 	has_many :students
 
 	scope :attendance_count, -> (lec_id) {(where("lecture_id=? AND present=?",lec_id,true)).length}
-
-	
 end

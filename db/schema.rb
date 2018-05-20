@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 2018_05_18_110802) do
     t.string "uid"
     t.string "token"
     t.string "provider"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_authentications_on_user_id"
+    t.integer "student_id"
+    t.index ["student_id"], name: "index_authentications_on_student_id"
   end
 
   create_table "lectures", force: :cascade do |t|

@@ -8,28 +8,12 @@ class HomeController < ApplicationController
  		# code.....
  		# generate the link for it 
  		@qr = RQRCode::QRCode.new( 'http://github.com/', :size => 4, :level => :h )
- 	# 	@qrcode = RQRCode::QRCode.new("http://github.com/")
-		# svg = @qrcode.as_svg
-		# # With default options specified explicitly
-		# svg = qrcode.as_svg(
-		# 	offset: 0, color: '000', 
-	 #        shape_rendering: 'crispEdges', 
-  #           module_size: 11
-  #           )
-  		# p @qr
-  # 		@qr = RQRCode::QRCode.new( 'my string to generate', :size => 4, :level => :h )
-		# puts @qr.to_s
- 		# respond_to do |format|
- 		# 	format.html
- 		# 	format.json
- 		# end
  	end
 
 
 
-
-
  	# take the student coordinate
+ 	#############################################
  	# def student_attend
 	 # 	student_lat = params["lat"].to_f
 	 # 	student_lng = params["lng"].to_f
@@ -39,6 +23,7 @@ class HomeController < ApplicationController
  	# end
 
  	# pass the value of student coordinate and take set point from the database 
+ 	#############################################
  	# def calculate_distance(student_lat,student_lon)
  	# 	puts "inside calculate_distance"
  	# 	class_lat = 3.134873
