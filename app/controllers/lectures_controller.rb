@@ -13,13 +13,13 @@ class LecturesController < ApplicationController
  	end
 
  	def show
-    if current_user
+    # if current_user
      	@lecture = Lecture.find(params[:id])
       cookies[:lecture] = @lecture.id
-    else
-      flash[:warning] = "You Should not Access this page"
-      redirect_to '/'
-    end
+    # else
+    #   flash[:warning] = "You Should not Access this page"
+    #   redirect_to '/'
+    # end
   end
 
   def new
@@ -69,8 +69,9 @@ class LecturesController < ApplicationController
     @lecture = Lecture.find(params[:lecture_id])
     # change domain name after deployment because we are using localhost for now
     @domain = 'http://localhost:3000/'
-    @param = 'lectures/#{@lecture.id.to_i}'
-    @qr = RQRCode::QRCode.new('#{@domain}#{param}', :size => 4, :level => :h )
+    @param = "lectures/#{@lecture.id.to_i}"
+    @link = @domain + @param 
+    @qr = RQRCode::QRCode.new("#{@link}")
     return @qr
   end
 end
