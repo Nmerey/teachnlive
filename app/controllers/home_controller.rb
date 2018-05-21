@@ -3,15 +3,6 @@ class HomeController < ApplicationController
  	def index
  	end
 
- 	def generate_qr_code
- 		# search for current subject in database
- 		# code.....
- 		# generate the link for it 
- 		@qr = RQRCode::QRCode.new( 'http://github.com/', :size => 4, :level => :h )
- 	end
-
-
-
  	# take the student coordinate
  	#############################################
  	# def student_attend

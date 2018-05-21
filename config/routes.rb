@@ -19,5 +19,6 @@ Rails.application.routes.draw do
 
   post "/lectures" => "lectures#create"
   resources :lectures, only: [:index,:new,:show] do
+    get "/qr" => "lectures#qr_code"
   end
 end

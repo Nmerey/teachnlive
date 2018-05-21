@@ -1,28 +1,51 @@
 class LecturesController < ApplicationController
-  # before_action :set_property, only: [:show, :edit, :update, :destroy]
-before_action :calculate_attendance, only: [:index]
- 	def index
-    @try = calculate_attendance
- 		@lecture = Lecture.all
+  before_action :calculate_attendance, only: [:index]
+ 	before_action :qr_code, only: [:generate_qr]
+  
+  def index
+    if current_user
+      @try = calculate_attendance
+   		@lecture = Lecture.all
+    else
+      flash[:warning] = "You should not Access this page"
+      redirect_to '/'
+    end
  	end
 
  	def show
-   	@lecture = Lecture.find(params[:id])
-    @qr = RQRCode::QRCode.new('http://github.com/', :size => 4, :level => :h )
-    # response["set-cookie"]="lecture=#{@lecture.id}"
-    cookies[:lecture] = @lecture.id
+    if current_user
+     	@lecture = Lecture.find(params[:id])
+      cookies[:lecture] = @lecture.id
+    else
+      flash[:warning] = "You Should not Access this page"
+      redirect_to '/'
+    end
   end
 
- 	def new
- 		@lecture = Lecture.new
+  def new
+    if current_user
+      @lecture = Lecture.new
+    else
+      flash[:warning] = "You Should not Access this page as a student"
+      redirect_to '/'
+    end
   end
 
 
   def create
-    @lecture = Lecture.new(name: params["lecture"]["name"], user_id: params["lecture"]["user_id"])
+    @lecture = Lecture.new(name: params["lecture"]["name"], user_id: current_user.id)
     @lecture.save
     flash[:warning] = "Lecture is done saving"
     redirect_to '/'
+  end
+
+  def qr_code
+    if current_user
+      @get_qr = generate_qr  
+    else
+      flash[:warning] = "You should not Access this page"
+      redirect_to "/"
+    end
   end
 
   private
@@ -37,8 +60,17 @@ before_action :calculate_attendance, only: [:index]
     return @total
   end
 
- 	def set_lecture
+  def set_lecture
       @lecture = Lecture.find(params[:id])
   end
 
+  def generate_qr
+    uid = current_user.id
+    @lecture = Lecture.find(params[:lecture_id])
+    # change domain name after deployment because we are using localhost for now
+    @domain = 'http://localhost:3000/'
+    @param = 'lectures/#{@lecture.id.to_i}'
+    @qr = RQRCode::QRCode.new('#{@domain}#{param}', :size => 4, :level => :h )
+    return @qr
+  end
 end

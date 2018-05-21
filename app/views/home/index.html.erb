@@ -63,19 +63,6 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous">
   </script>
-  
-  <script>
-    function generateQrCode() {
-      $.ajax({
-        url: "/qr_code",
-        type: "GET",
-        dataType: "HTML",
-        success: function(qr_code){
-          console.log(qr_code)
-        }
-      });
-    }
-  </script>
 
 <!-- script to pass the coordinate to the server side using ajax -->
    <!--  <script>
