@@ -14,6 +14,78 @@
  *= require_self
  *= require animate
  */
-h1 {
-	color: red;
+ body {
+    /*font-family: 'Roboto' !important;*/
+    font-family: 'Oswald';
+ }
+
+.field {
+	margin-left:auto; 
+    margin-right:auto;
+    text-align: center;
+}
+
+.actions {
+	text-align: center;
+}
+
+.content {
+    max-width: 90%;
+    margin: auto;
+}
+
+#header {
+	text-align: center;
+}
+
+#headline {
+	text-align: center;
+}
+
+#attendance {
+    
+    border-collapse: collapse;
+    width: 50%;
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+#attendance td, #attendance th {
+    border: 1px solid grey;
+    padding: 8px;
+}
+
+#attendance tr:nth-child(even){background-color: #f2f2f2;}
+
+#attendance tr:hover {background-color: #ddd;}
+
+#attendance th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #343a40;
+    color: white;
+}
+
+body.preloader-site {
+    overflow: hidden;
+}
+
+.preloader-wrapper {
+    height: 100%;
+    width: 100%;
+    background: #FFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999999;
+}
+
+.preloader-wrapper .preloader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 120px;
 }
