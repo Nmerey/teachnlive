@@ -1,5 +1,6 @@
 class Student < ApplicationRecord
 	has_many :lectures
+	has_many :attendances
 	has_many :authentications, dependent: :destroy
 
 

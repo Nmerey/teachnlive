@@ -1,0 +1,5 @@
+<% @list_lecture.each do |lecture| %>
+<%= lecture.name %>
+
+<a href="<%= lecture_sign_up_path(lecture.id) %>">Sign Up</a><br>
+<% end %>

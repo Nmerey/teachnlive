@@ -4,7 +4,7 @@ class LecturesController < ApplicationController
   
   def index
     if current_user
-      @try = calculate_attendance
+      # @try = calculate_attendance
    		@lecture = Lecture.all
     else
       flash[:warning] = "You should not Access this page"
@@ -13,13 +13,7 @@ class LecturesController < ApplicationController
  	end
 
  	def show
-    # if current_user
-     	@lecture = Lecture.find(params[:id])
-      cookies[:lecture] = @lecture.id
-    # else
-    #   flash[:warning] = "You Should not Access this page"
-    #   redirect_to '/'
-    # end
+   	@lecture = Lecture.find(params[:id])
   end
 
   def new
@@ -30,7 +24,11 @@ class LecturesController < ApplicationController
       redirect_to '/'
     end
   end
-
+  
+  def student_list
+    @lecture = Lecture.find(params[:lecture_id])
+    @attendance = Attendance.where("lecture_id = ? AND present = ?", @lecture.id, true)
+  end
 
   def create
     @lecture = Lecture.new(name: params["lecture"]["name"], user_id: current_user.id)
@@ -50,15 +48,15 @@ class LecturesController < ApplicationController
 
   private
 
-  def calculate_attendance
-    uid = current_user.id
-    @lecture = Lecture.find_by('user_id = ?', uid)
-    p @lecture
-    @calc_attendance = Attendance.where("present = ? AND lecture_id = ?", true, @lecture.id)
-    p @calc_attendance
-    @total = @calc_attendance.count
-    return @total
-  end
+  # def calculate_attendance
+  #   uid = current_user.id
+  #   @lecture = Lecture.where('user_id = ?', uid)
+  #   @lecture.each do |x|
+  #   @calc_attendance = Attendance.where("present = ? AND lecture_id = ?", true, @lecture.id)
+  #   p @calc_attendance
+  #   @total = @calc_attendance.count
+  #   return @total
+  # end
 
   def set_lecture
       @lecture = Lecture.find(params[:id])
@@ -74,4 +72,15 @@ class LecturesController < ApplicationController
     @qr = RQRCode::QRCode.new("#{@link}")
     return @qr
   end
+
+  # def late_check
+  #   uid = current_user.id
+  #   @lecture = Lecture.find(params[:id])
+  #   @late = Attendance.where("present = ?", true)
+  #   @late.each do |obj|
+  #     if obj.created_at <= @lectures.start_time
+  #       # student
+  #     end
+  #   end  
+  # end
 end
