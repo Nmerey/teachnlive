@@ -11,57 +11,72 @@ class StudentsController < ApplicationController
 
 	def create_from_omniauth
 	    auth_hash = request.env["omniauth.auth"]
-	    p auth_hash
 	    authentication = Authentication.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"]) ||  Authentication.create_with_omniauth(auth_hash)
 	    p "============================================"
+	    p 2
 	    p authentication
 	    p "============================================"
-	    # if: previously already logged in with OAuth
-	    if authentication.student
-	    	current = DateTime.now
-	    	diffrence_in_hours = ((current.to_i - authentication.updated_at.to_i) * 24)
-	    	if 	diffrence_in_hours < 2 
+	    # if cookies[:lecture] != cookies[:sign_up_lecture]
+	    if authentication.student && cookies[:old_lecture] == cookies[:exist_lecture] || cookies[:second_lecture] == cookies[:exist_lecture]
+	    	# current = DateTime.now
+	    	# diffrence_in_hours = ((current.to_i - authentication.updated_at.to_i) * 24)
 			    student = authentication.student
 			    p "============================================"
+			    p 1
 			    p student
 			    p "============================================"
 			    authentication.update_token(auth_hash)
-		      	attendance = Attendance.new
-			    attendance.present = true
-			    attendance.lecture_id = cookies[:lecture].to_i
-			    attendance.student_id = authentication.student_id
-			    attendance.save
+	    	# if 	diffrence_in_hours < 2
+		      	attendance = Attendance.find_by(student_id: authentication.student_id, lecture_id:  cookies[:old_lecture])
+		      	attendance = Attendance.find_by(student_id: authentication.student_id, lecture_id:  cookies[:second_lecture])
+		      	p "========================"
+		      	p "trywvsyb"
+		      	p attendance
+		      	p "========================"
+			    if attendance == nil
+			    	flash[:danger] = "I can See some cheating you want to do there"
+			    	return redirect_to '/'
+			    else
+			    	attendance.present = true
+			    	attendance.save
+			    end
 		      	@next = root_url
 	      		flash[:notice] = "Attendance Taken"
-			else
-				@next = root_url
-	      		flash[:notice] = "Your attendance have been taken just now"
-			end
-	    # else: user logs in with OAuth for the first time
 	    else
 	      p "====================================="
 	      p "in the SessionsController"
 	      p "============================="
-	      # user = User.create_with_auth_and_hash(authentication, auth_hash)
-	      student = Student.create_with_auth_and_hash(authentication, auth_hash)
+	      x = Student.find_by(first_name: auth_hash["info"]["first_name"])
+	      if x == nil
+	      	student = Student.create_with_auth_and_hash(authentication, auth_hash)
+	  	  else
+	  	  	authentication.update_token(auth_hash)
+	  	  end 
 	      attendance = Attendance.new
-	      attendance.present = true
-	      attendance.lecture_id = cookies[:lecture].to_i
+	      # attendance.present = true
+	      attendance.lecture_id = cookies[:new_lecture].to_i
 	      attendance.student_id = authentication.student_id
 	      attendance.save
-	      p attendance
+	      cookies[:second_lecture] = cookies[:new_lecture]
+	      cookies[:old_lecture] = cookies[:new_lecture]
+	      cookies[:new_lecture] =  nil
 	      # you are expected to have a path that leads to a page for editing user details
 	      @redirect = root_path
-	      flash[:notice] = "Student have attend the class"
+	      flash[:notice] = "You Have Successfully Sign Up For the Class"
 	  	end
 	  	p '============================================'
 	  	p 'cookies '
-	  	p cookies[:lecture]
+	  	p cookies[:old_lecture]
 	  	p '============================================'
 	  	redirect_to '/'
 	end
 	
-	def late_or_early
-		# if 
+	def new_student
+		@list_lecture = Lecture.all
+	end
+
+	def sign_up
+		cookies[:new_lecture] = params[:lecture_id]
+		redirect_to "/auth/google_oauth2"
 	end
 end
