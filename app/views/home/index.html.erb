@@ -27,62 +27,17 @@
   <button onclick="getLocation()">Try It</button>
   <br>
   <button onclick="generateQrCode()">Get Qr Code</button>
-  <a href="/qr_code">Qr with no AJAX</a>
+  <button><a href="/qr">Qr with no AJAX</a></button>
   <h2 id="demo"></h2>
   <h2 id="demo2"></h2> -->
 
 
-<!-- script to take the user location and paste it on the page -->
-  <!--   <script>
-      var x = document.getElementById("demo");
-      var y = document.getElementById("demo2");
-      var lat,lng
-      function getLocation() {
-          if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(getStudentPosition,handleError,option);
-          } else { 
-              x.innerHTML = "Geolocation is not supported by this browser.";
-          }
-      }
-
-      var option = {
-        enableHighAccuracy: true
-      }
-      
-      function getStudentPosition(position) {
-          x.innerHTML = position.coords.latitude 
-          y.innerHTML = position.coords.longitude
-          sendToServer()
-      }
-
-      function handleError() {
-        console.log('permission denied')
-        x.innerHTML = "Permission Denied"
-      }
-    </script>
-   -->
   <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous">
   </script>
 
-<!-- script to pass the coordinate to the server side using ajax -->
-   <!--  <script>
-      function sendToServer() {
-        var lat = $("#demo").text()
-        var lng = $("#demo2").text()
-        console.log(lat,lng)
-        $.ajax({
-          url: "/attending_authentication",
-          type: "GET",
-          data: {lat: lat, lng: lng}, 
-          dataType: "JSON"
-
-        });
-      }
-    </script>
-   -->
 
 </body>
 </html>

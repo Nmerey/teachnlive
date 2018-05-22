@@ -3,12 +3,14 @@
 <head>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
-
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Oswald|Quicksand|Tajawal" rel="stylesheet">
-
   <%= stylesheet_link_tag 'hover' %>
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+  <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+  <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
 </head>
@@ -21,7 +23,6 @@
   </div>
     
   <div id="header">
-
     <% if signed_in? -%>
 
       <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
@@ -59,6 +60,7 @@
     <% else -%>
       <br>
       <% end -%>
+
 
   </div>
 

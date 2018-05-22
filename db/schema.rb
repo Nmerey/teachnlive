@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_18_110802) do
+ActiveRecord::Schema.define(version: 2018_05_20_084238) do
 
   create_table "attendances", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 2018_05_18_110802) do
     t.string "subject_name"
     t.date "start_date"
     t.date "end_date"
+    t.string "time"
     t.index ["student_id"], name: "index_lectures_on_student_id"
     t.index ["user_id"], name: "index_lectures_on_user_id"
   end

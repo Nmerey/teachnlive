@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
 	    p "============================================"
 	    p authentication
 	    p "============================================"
+
 	    if authentication.student
 		    student = authentication.student
 		    p "============================================"
@@ -35,6 +36,7 @@ class StudentsController < ApplicationController
 
 		    if cookies[:old_lecture] == cookies[:exist_lecture] || cookies[:second_lecture] == cookies[:exist_lecture]
 		      	attendance = Attendance.find_by(student_id: authentication.student_id, lecture_id:  cookies[:exist_lecture])
+
 		      	p "========================"
 		      	p "trywvsyb"
 		      	p attendance
@@ -79,6 +81,8 @@ class StudentsController < ApplicationController
 	  	  	return redirect_to root_path
  	  	  end
 	  	end
+
+
 	end
 	
 	def new_student
