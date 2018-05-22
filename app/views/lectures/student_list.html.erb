@@ -1,5 +1,29 @@
-<% @attendance.each do |x| %>
-<% @student = x.student %>
-<%= @student.first_name %><%= @student.last_name %><br>
-<%= x.created_at %>
+<style>
+	body {
+		color: white;
+	}
+</style>
+<% @attendance.each do |attendance| %>
+<% sid = attendance.student_id %>
+<% @student = Student.find_by(id: sid) %>
+<table>
+	<tr>
+		<th>name</th>
+		<th>atendance</th>
+	</tr>
+	<tr>
+		<td><%= @student.first_name %> <%= @student.last_name %></td>
+		<td>
+			<% @x = @student.id %>
+			<% @at = Attendance.find_by(student_id: @x, lecture_id: params[:lecture_id]) %>
+			<% @y = @at.present %>
+			<% if @y == false %>
+				NO
+			<% else %>
+				Yes
+			<% end %>
+		</td>
+	</tr>
+</table>
+
 <% end %>

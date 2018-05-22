@@ -1,6 +1,33 @@
 
+	<div class="container">
+		 <!-- Lecture name will be dispalyed here -->
+		<h1 id="header">Welcome <%= current_user.name %></h1> 
 
-<h1>Welcome</h1>
-<h1><%= @try %></h1>
-<h2>Student Attendance</h2>
+		<h2 id="headline">Student Attendance</h2>
+
+		<table id="attendance" style="width: 100%">
+			<tr>
+				<th>Lecture's Name</th>
+				<th>Subject</th>
+				<th>Student Attendee</th>
+				<th>Time</th>
+				<th>QR Code</th>
+				<th></th>
+			</tr>
+
+			<% @lecture.each do |lec| %>
+			<tr>
+				<td><%= lec.name %></td>
+				<td><%= lec.subject_name %></td>
+				<td><%= Attendance.attendance_count(lec.id) %></td>
+				<td><%= lec.time %></td>
+				<td><a href="<%= lecture_qr_path(lec.id) %>">QR</a></td>
+				<td><a href="<%= lecture_student_list_path(lec.id) %>">View All Student</a></td>
+			</tr>
+
+			<% end %>
+
+		</table>
+	</div>
+</body>
 

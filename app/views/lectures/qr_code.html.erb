@@ -4,6 +4,9 @@
       border-style: none;
       border-color: #0000ff;
       border-collapse: collapse;
+      margin-left: auto;
+      margin-right: auto;
+
     }
 
     td {
@@ -14,7 +17,111 @@
       height: 10px; 
     }
 
+
     td.black { border-color: #000; }
     td.white { border-color: #fff; }
+
+    #cover {
+      position: fixed;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: #141526;
+      z-index: 9999;
+      font-size: 65px;
+      text-align: center;
+      padding-top: 200px;
+      color: #fff;
+      font-family:tahoma;
+    }
 </style>
+<style>
+  .flex-container{
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    display: flex;
+    flex-direction: row;
+}
+.box{
+    display: block;
+    margin: 10px;
+    border: 1em solid #00ffcc;
+    opacity: 0;
+}
+.one{
+    animation: box-appear 3s linear infinite;
+}
+.two{
+    animation: box-appear 3s linear .5s infinite;
+}
+.three{
+    animation: box-appear 3s linear 1s infinite;
+}
+@keyframes box-appear{
+    0%{
+        opacity: 0;
+    }
+    16%{
+        opacity: 1;
+    }
+    48%{
+        opacity: 1;
+    }
+    64%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+#preloader {
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  background: black;
+}
+
+.preloader-font {
+  text-align: center;
+  margin-top: 13%;
+  font-weight: 900;
+  color: #7da79e;
+  margin-right: 2%;
+}
+
+</style>
+<!-- 
+<div id="cover"> <span class="glyphicon glyphicon-refresh w3-spin preloader-Icon"></span> loading...</div> -->
+<div id="preloader">
+  <div class="flex-container">
+    <span class="box one"></span>
+    <span class="box two"></span>
+    <span class="box three"></span>
+  </div>
+    <h4 class="preloader-font">Generating Qr Code</h4>
+</div>
+
 <%= raw @get_qr.as_html %>
+
+<div class="actions">
+  <a href= "<%= lectures_path %>">Back</a>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+<script>
+
+  // $(window).on('load',
+    // setTimeout($("#preloader").fadeout(), 2000)
+  // $("#preloader").fadeOut();
+  // )
+$('#preloader').delay(2000).fadeOut('fast');
+  // function() {
+  //   $("#preloader").fadeout()
+  // }
+</script>

@@ -8,7 +8,7 @@ Clearance.configure do |config|
   config.httponly = false
   config.mailer_sender = "reply@example.com"
   config.password_strategy = Clearance::PasswordStrategies::BCrypt
-  config.redirect_url = "/"
+  config.redirect_url = "/lectures"
   config.rotate_csrf_on_sign_in = false
   config.secure_cookie = false
   config.sign_in_guards = []

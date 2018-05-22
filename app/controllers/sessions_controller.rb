@@ -13,11 +13,10 @@ class SessionsController < Clearance::SessionsController
   else
     user = User.create_with_auth_and_hash(authentication, auth_hash)
     # you are expected to have a path that leads to a page for editing user details
-    @next = root_path
-    @notice = "User created. Please confirm or edit details"
+    @next = lectures_path
   end
 
   sign_in(user)
-  redirect_to @next, :notice => @notice
+  redirect_to lectures_path
   end
 end

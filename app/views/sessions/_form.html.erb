@@ -13,12 +13,12 @@
     <button type="submit">Sign In</button>
   </div>
 
-  <%= link_to "Sign in with Google", "/auth/google_oauth2" %>
+  <!-- <%= link_to "Sign in with Google", "/auth/google_oauth2" %> -->
 
   <div class="other-links">
     <% if Clearance.configuration.allow_sign_up? %>
       <%= link_to t(".sign_up"), sign_up_path %>
     <% end %><br>
-    <%= link_to t(".forgot_password"), new_password_path %>
+    <!-- <%= link_to t(".forgot_password"), new_password_path %> -->
   </div>
 <% end %>
