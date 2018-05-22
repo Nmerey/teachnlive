@@ -1,5 +1,4 @@
-<% @attendance.each do |x| %>
-<% @student = x.student %>
-<%= @student.first_name %><%= @student.last_name %><br>
-<%= x.created_at %>
+<% @attendance.each do |attendance| %>
+<% sid = attendance.student_id %>
+<% Student.find_by(id: sid) %>
 <% end %>
