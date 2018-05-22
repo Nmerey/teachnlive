@@ -15,13 +15,8 @@ class LecturesController < ApplicationController
 
  	def show
 
-   	@lecture = Lecture.find(params[:id])
-    cookies[:exist_lecture] = params[:id]
-
-    # else
-    #   flash[:warning] = "You Should not Access this page"
-    #   redirect_to '/'
-    # end
+     	@lecture = Lecture.find(params[:id])
+      cookies[:exist_lecture] = params[:id]
 
   end
 
@@ -38,7 +33,8 @@ class LecturesController < ApplicationController
   
   def student_list
     @lecture = Lecture.find(params[:lecture_id])
-    @attendance = Attendance.where("lecture_id = ? AND present = ?", @lecture.id, true)
+    p @lecture
+    @attendance = Attendance.where("lecture_id = ?", @lecture.id)
   end
 
 
