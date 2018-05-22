@@ -1,10 +1,11 @@
 class LecturesController < ApplicationController
+
   # before_action :calculate_attendance, only: [:index]
  	before_action :qr_code, only: [:generate_qr]
   
   def index
     if current_user
-      # @try = calculate_attendance
+
    		@lecture = Lecture.all
     else
       flash[:warning] = "You should not Access this page"
@@ -13,9 +14,16 @@ class LecturesController < ApplicationController
  	end
 
  	def show
+
    	@lecture = Lecture.find(params[:id])
     # @attendance = Attendanc
     cookies[:exist_lecture] = params[:id]
+
+    # else
+    #   flash[:warning] = "You Should not Access this page"
+    #   redirect_to '/'
+    # end
+
   end
 
   def new
@@ -25,7 +33,13 @@ class LecturesController < ApplicationController
       flash[:warning] = "You Should not Access this page as a student"
       redirect_to '/'
     end
+
+   	@lecture = Lecture.find(params[:id])
+    # @attendance = Attendanc
+    cookies[:exist_lecture] = params[:id]
+
   end
+
   
   def student_list
     @lecture = Lecture.find(params[:lecture_id])
@@ -50,6 +64,7 @@ class LecturesController < ApplicationController
 
   private
 
+
   # def calculate_attendance
   #   uid = current_user.id
   #   @lecture = Lecture.where('user_id = ?', uid)
@@ -60,9 +75,11 @@ class LecturesController < ApplicationController
   #   return @total
   # end
 
+
   def set_lecture
       @lecture = Lecture.find(params[:id])
   end
+
 
   def generate_qr
     uid = current_user.id
@@ -85,4 +102,5 @@ class LecturesController < ApplicationController
   #     end
   #   end  
   # end
+
 end

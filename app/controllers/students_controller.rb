@@ -42,6 +42,13 @@ class StudentsController < ApplicationController
 			    end
 		      	@next = root_url
 	      		flash[:notice] = "Attendance Taken"
+	      		
+			else
+				@next = root_url
+	      		flash[:notice] = "Your attendance have been taken just now"
+			end
+	    # else: user logs in with OAuth for the first time
+
 	    else
 	      p "====================================="
 	      p "in the SessionsController"
