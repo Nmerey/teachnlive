@@ -5,9 +5,13 @@ class HomeController < ApplicationController
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 3a5084ded46ec15e297d22bc0674e0c9a4d165e5
+=======
+
+>>>>>>> lecture_page
  	def generate_qr_code
  		# search for current subject in database
  		# code.....
@@ -30,6 +34,7 @@ class HomeController < ApplicationController
  		# end
  		
  	end
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 
@@ -40,6 +45,9 @@ class HomeController < ApplicationController
 >>>>>>> fa5c062012a9b76441e3dd4c06bc808b09869dfd
 =======
 >>>>>>> 3a5084ded46ec15e297d22bc0674e0c9a4d165e5
+=======
+ 	
+>>>>>>> lecture_page
  	# take the student coordinate
  	#############################################
  	# def student_attend
