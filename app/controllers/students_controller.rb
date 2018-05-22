@@ -26,9 +26,10 @@ class StudentsController < ApplicationController
 			    p student
 			    p "============================================"
 			    authentication.update_token(auth_hash)
-	    	# if 	diffrence_in_hours < 2
 		      	attendance = Attendance.find_by(student_id: authentication.student_id, lecture_id:  cookies[:old_lecture])
-		      	attendance = Attendance.find_by(student_id: authentication.student_id, lecture_id:  cookies[:second_lecture])
+		      	if attendance == nil 
+		      		attendance = Attendance.find_by(student_id: authentication.student_id, lecture_id:  cookies[:second_lecture])
+		      	end
 		      	p "========================"
 		      	p "trywvsyb"
 		      	p attendance
@@ -42,13 +43,6 @@ class StudentsController < ApplicationController
 			    end
 		      	@next = root_url
 	      		flash[:notice] = "Attendance Taken"
-	      		
-			else
-				@next = root_url
-	      		flash[:notice] = "Your attendance have been taken just now"
-			end
-	    # else: user logs in with OAuth for the first time
-
 	    else
 	      p "====================================="
 	      p "in the SessionsController"
@@ -73,7 +67,7 @@ class StudentsController < ApplicationController
 	  	end
 	  	p '============================================'
 	  	p 'cookies '
-	  	p cookies[:old_lecture]
+	  	p  cookies[:old_lecture]
 	  	p '============================================'
 	  	redirect_to '/'
 	end
