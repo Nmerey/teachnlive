@@ -47,6 +47,7 @@ class LecturesController < ApplicationController
   end
 
 
+
   def create
     @lecture = Lecture.new(name: params["lecture"]["name"], user_id: current_user.id, subject_name: params["lecture"]["subject_name"], time: params["lecture"]["time"])
     @lecture.save
