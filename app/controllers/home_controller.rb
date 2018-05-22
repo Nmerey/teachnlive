@@ -23,6 +23,7 @@ class HomeController < ApplicationController
  		# 	format.html
  		# 	format.json
  		# end
+ 		
  	end
 
 

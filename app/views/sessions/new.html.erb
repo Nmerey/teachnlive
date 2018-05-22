@@ -1,6 +1,34 @@
-<div id="clearance" class="sign-in">
-  <h2><%= t(".title") %></h2>
+<!DOCTYPE html>
+<html>
+<head>
+	<%= stylesheet_link_tag "entry_page" %>
+	<title>Sign-up Page</title>
+	<meta name="google-signin-client_id" content="406440477861-tlou1mbfebjfqhtgun0dkpsd36d46t20.apps.googleusercontent.com.apps.googleusercontent.com">
+</head>
 
-  <%= render partial: '/sessions/form' %>
+<body>
 
-</div>
+	
+
+	<div class="login-page">
+
+  		<div class="form">
+
+  			<div id="clearance" class="sign-in">
+  		
+  				<%= render partial: '/sessions/form' %>
+
+			</div>
+			
+				
+		  
+  		</div>
+	
+	</div>
+
+
+	<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+		
+</body>
+
+</html>

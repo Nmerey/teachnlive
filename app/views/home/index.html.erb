@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <%= stylesheet_link_tag "main" %>
   <meta charset="utf-8">
   <title>GeoLocation</title>
 
@@ -10,14 +11,22 @@
 </head>
 <body>
 
-  <a href="/attending_authentication">Attends</a>
-  <div id="map" style="display: none"></div>
-  <button onclick="getLocation()">Try It</button>
-  <br>
-  <button onclick="generateQrCode()">Get Qr Code</button>
-  <a href="/qr_code">Qr with no AJAX</a>
-  <h2 id="demo"></h2>
-  <h2 id="demo2"></h2>
+	<div class="container">
+
+		<div class="d-flex justify-content-center" id="buttonGroup">
+			<div class="btnGroup" style="display: flex;">
+		
+				<div >
+          <a class="btn btn-outline-light " href="/attending_authentication ">Attends</a>    
+        </div>
+				<div class="ml-2">
+          <a class="btn btn-outline-light" href="/qr_code" role="button">Get QR</a>    
+        </div>
+	
+			</div>
+		</div>
+		
+	</div>
 
 
 <!-- script to take the user location and paste it on the page -->

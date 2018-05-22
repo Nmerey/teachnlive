@@ -14,7 +14,8 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-
+//= require jquery
+//= require bootstrap-sprockets
 
 // window.onload = function() {
 // 	if (navigator.geolocation) {

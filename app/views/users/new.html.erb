@@ -1,15 +1,35 @@
-<div id="clearance" class="sign-up">
-  <h2><%= t(".title") %></h2>
+<!DOCTYPE html>
+<html>
+<head>
+  <%= stylesheet_link_tag "entry_page" %>
+  <title>Sign-UP
+  </title>
+</head>
+<body>
+  <div id="clearance" class="sign-up">
 
-  <%= form_for @user do |form| %>
-    <%= render partial: '/users/form', object: form %>
+  <div class="login-page">
+    
+    <div class="form">
+      
+      <h3><%= t(".title") %></h3><br>
+      <%= form_for @user do |form| %>
+      <%= render partial: '/users/form', object: form %>
+        <div class="submit-field mb-2">
+          <button>Sign up</button>
+        </div>
 
-    <div class="submit-field">
-      <%= form.submit %>
+        <div class="other-links">
+          <%= link_to t(".sign_in"), sign_in_path %>
+        </div>
+      <% end %>
+      
     </div>
 
-    <div class="other-links">
-      <%= link_to t(".sign_in"), sign_in_path %>
-    </div>
-  <% end %>
+  </div>  
+
 </div>
+
+
+</body>
+</html>
