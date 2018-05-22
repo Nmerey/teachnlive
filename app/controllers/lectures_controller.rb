@@ -5,7 +5,7 @@ class LecturesController < ApplicationController
   
   def index
     if current_user
-
+      # @total = calculate_attendance
    		@lecture = Lecture.all
     else
       flash[:warning] = "You should not Access this page"
@@ -46,12 +46,14 @@ class LecturesController < ApplicationController
     @attendance = Attendance.where("lecture_id = ? AND present = ?", @lecture.id, true)
   end
 
+
   def create
-    @lecture = Lecture.new(name: params["lecture"]["name"], user_id: current_user.id)
+    @lecture = Lecture.new(name: params["lecture"]["name"], user_id: current_user.id, subject_name: params["lecture"]["subject_name"], time: params["lecture"]["time"])
     @lecture.save
     flash[:warning] = "Lecture is done saving"
     redirect_to '/'
   end
+
 
   def qr_code
     if current_user
