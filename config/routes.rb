@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
-  # resources :subjects
   resources :users, controller: "clearance/users", only: [:create] do
     resource :password,
       controller: "clearance/passwords",
@@ -16,9 +15,14 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   root 'home#index'
-  get "/auth/:provider/callback" => "sessions#create_from_omniauth"
-  get "/subjects" => "subjects#new", as: "subject"
-  post "/subjects" => "subjects#create"
-  get "/subjects/show" => "subjects#show"
+  get "/auth/:provider/callback" => "students#create_from_omniauth"
 
+  post "/lectures" => "lectures#create"
+  resources :lectures, only: [:index,:new,:show] do
+    get "/qr" => "lectures#qr_code"
+    get '/student_list' => 'lectures#student_list'
+    get '/sign_up' => "students#sign_up"
+  end
+
+  get '/sign_up/students' => "students#new_student"
 end

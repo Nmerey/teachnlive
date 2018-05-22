@@ -1,0 +1,5 @@
+<% @attendance.each do |x| %>
+<% @student = x.student %>
+<%= @student.first_name %><%= @student.last_name %><br>
+<%= x.created_at %>
+<% end %>

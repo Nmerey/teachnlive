@@ -3,6 +3,7 @@ class HomeController < ApplicationController
  	def index
  	end
 
+
  	def generate_qr_code
  		# search for current subject in database
  		# code.....
@@ -26,11 +27,8 @@ class HomeController < ApplicationController
  		
  	end
 
-
-
-
-
  	# take the student coordinate
+ 	#############################################
  	# def student_attend
 	 # 	student_lat = params["lat"].to_f
 	 # 	student_lng = params["lng"].to_f
@@ -40,6 +38,7 @@ class HomeController < ApplicationController
  	# end
 
  	# pass the value of student coordinate and take set point from the database 
+ 	#############################################
  	# def calculate_distance(student_lat,student_lon)
  	# 	puts "inside calculate_distance"
  	# 	class_lat = 3.134873

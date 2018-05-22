@@ -3,14 +3,23 @@
 <head>
   <%= stylesheet_link_tag "main" %>
   <meta charset="utf-8">
-  <title>GeoLocation</title>
+  <title>Trackie</title>
 
   <style>
-    
+
+
+    html, body, #map {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+
   </style>
 </head>
 <body>
 
+<<<<<<< beatify
 	<div class="container">
 
 		<div class="d-flex justify-content-center" id="buttonGroup">
@@ -27,6 +36,17 @@
 		</div>
 		
 	</div>
+<!-- =======
+<!--   <a href="/attending_authentication">Attends</a>
+
+  <div id="map" style="display: none"></div>
+  <button onclick="getLocation()">Try It</button>
+  <br>
+  <button onclick="generateQrCode()">Get Qr Code</button>
+  <a href="/qr_code">Qr with no AJAX</a>
+  <h2 id="demo"></h2>
+  <h2 id="demo2"></h2> -->
+>>>>>>> master -->
 
 
 <!-- script to take the user location and paste it on the page -->
@@ -63,19 +83,6 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous">
   </script>
-  
-  <script>
-    function generateQrCode() {
-      $.ajax({
-        url: "/qr_code",
-        type: "GET",
-        dataType: "HTML",
-        success: function(qr_code){
-          console.log(qr_code)
-        }
-      });
-    }
-  </script>
 
 <!-- script to pass the coordinate to the server side using ajax -->
    <!--  <script>
@@ -93,5 +100,6 @@
       }
     </script>
    -->
+
 </body>
 </html>
