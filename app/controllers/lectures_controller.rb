@@ -1,5 +1,5 @@
 class LecturesController < ApplicationController
-  before_action :calculate_attendance, only: [:index]
+  # before_action :calculate_attendance, only: [:index]
  	before_action :qr_code, only: [:generate_qr]
   
   def index
@@ -13,9 +13,8 @@ class LecturesController < ApplicationController
  	end
 
  	def show
-   	@lecture = Lecture.find(params[:id])
-    # @attendance = Attendanc
-    cookies[:exist_lecture] = params[:id]
+     	@lecture = Lecture.find(params[:id])
+      cookies[:exist_lecture] = params[:id]
   end
 
   def new
@@ -29,7 +28,8 @@ class LecturesController < ApplicationController
   
   def student_list
     @lecture = Lecture.find(params[:lecture_id])
-    @attendance = Attendance.where("lecture_id = ? AND present = ?", @lecture.id, true)
+    p @lecture
+    @attendance = Attendance.where("lecture_id = ?", @lecture.id)
   end
 
   def create

@@ -13,22 +13,28 @@ class StudentsController < ApplicationController
 	    auth_hash = request.env["omniauth.auth"]
 	    authentication = Authentication.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"]) ||  Authentication.create_with_omniauth(auth_hash)
 	    p "============================================"
-	    p 2
 	    p authentication
 	    p "============================================"
-	    # if cookies[:lecture] != cookies[:sign_up_lecture]
-	    if authentication.student && cookies[:old_lecture] == cookies[:exist_lecture] || cookies[:second_lecture] == cookies[:exist_lecture]
-	    	# current = DateTime.now
-	    	# diffrence_in_hours = ((current.to_i - authentication.updated_at.to_i) * 24)
-			    student = authentication.student
-			    p "============================================"
-			    p 1
-			    p student
-			    p "============================================"
-			    authentication.update_token(auth_hash)
-	    	# if 	diffrence_in_hours < 2
-		      	attendance = Attendance.find_by(student_id: authentication.student_id, lecture_id:  cookies[:old_lecture])
-		      	attendance = Attendance.find_by(student_id: authentication.student_id, lecture_id:  cookies[:second_lecture])
+	    if authentication.student
+		    student = authentication.student
+		    p "============================================"
+		    p student
+		    p "============================================"
+		    authentication.update_token(auth_hash)
+
+		    if cookies[:new_lecture] != nil && cookies[:second_lecture] == nil
+		      attendance = Attendance.new
+		      attendance.lecture_id = cookies[:new_lecture].to_i
+		      attendance.student_id = authentication.student_id
+		      attendance.save
+		      cookies[:second_lecture] = cookies[:new_lecture]
+		      # cookies.delete :new_lecture
+		      flash[:success] = "Successfully Sign Up For the NEw CLass"
+		      return redirect_to root_path
+		    end
+
+		    if cookies[:old_lecture] == cookies[:exist_lecture] || cookies[:second_lecture] == cookies[:exist_lecture]
+		      	attendance = Attendance.find_by(student_id: authentication.student_id, lecture_id:  cookies[:exist_lecture])
 		      	p "========================"
 		      	p "trywvsyb"
 		      	p attendance
@@ -39,36 +45,40 @@ class StudentsController < ApplicationController
 			    else
 			    	attendance.present = true
 			    	attendance.save
+		      		flash[:notice] = "Attendance Taken"
+		      		return redirect_to root_path
 			    end
-		      	@next = root_url
-	      		flash[:notice] = "Attendance Taken"
+			else
+				byebug
+				flash[:warning] =  "Something Wrong with Cookie logic"
+				return redirect_to root_path
+			end
 	    else
 	      p "====================================="
 	      p "in the SessionsController"
 	      p "============================="
 	      x = Student.find_by(first_name: auth_hash["info"]["first_name"])
-	      if x == nil
-	      	student = Student.create_with_auth_and_hash(authentication, auth_hash)
-	  	  else
-	  	  	authentication.update_token(auth_hash)
-	  	  end 
-	      attendance = Attendance.new
-	      # attendance.present = true
-	      attendance.lecture_id = cookies[:new_lecture].to_i
-	      attendance.student_id = authentication.student_id
-	      attendance.save
-	      cookies[:second_lecture] = cookies[:new_lecture]
-	      cookies[:old_lecture] = cookies[:new_lecture]
-	      cookies[:new_lecture] =  nil
-	      # you are expected to have a path that leads to a page for editing user details
-	      @redirect = root_path
-	      flash[:notice] = "You Have Successfully Sign Up For the Class"
+	  	  if cookies[:new_lecture] != nil
+	  	  	if x 
+			  authentication.update_token(auth_hash)
+		    else
+	      	  student = Student.create_with_auth_and_hash(authentication, auth_hash)
+		    end
+		      attendance = Attendance.new
+		      attendance.lecture_id = cookies[:new_lecture].to_i
+		      attendance.student_id = authentication.student_id
+		      attendance.save
+		      cookies[:old_lecture] = cookies[:new_lecture]
+		      cookies.delete :new_lecture
+		      # cookies[:new_lecture] =  nil
+		      @redirect = root_path
+		      flash[:notice] = "You Have Successfully Sign Up For the Class"
+		      return redirect_to root_path
+	  	  else 
+	  	  	flash[:danger] = "You Didn't Register For that Course"
+	  	  	return redirect_to root_path
+ 	  	  end
 	  	end
-	  	p '============================================'
-	  	p 'cookies '
-	  	p cookies[:old_lecture]
-	  	p '============================================'
-	  	redirect_to '/'
 	end
 	
 	def new_student
