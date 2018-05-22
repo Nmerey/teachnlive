@@ -1,5 +1,28 @@
 <% @list_lecture.each do |lecture| %>
-<%= lecture.name %>
+<style type="text/css">
+	
+</style>
 
-<a href="<%= lecture_sign_up_path(lecture.id) %>">Sign Up</a><br>
+<table class="table table-dark" style="width: 50%;">
+	<thead>
+		<tr>
+			<th scope="col">id</th>
+			<th scope="col">Name</th>
+			<th scope="col">Subject</th>
+			<th scope="col">Sign-Up</th>
+
+		</tr>
+		
+	</thead>
+	<tbody>
+		<tr>
+			<th scope="row">1</th>
+			<td><%=lecture.name%></td>
+			<td><%= lecture.subject_name%></td>
+			<td><a href="<%= lecture_sign_up_path(lecture.id) %>">Sign Up</a><br></td>
+		</tr>
+	</tbody>
+	
+</table>
+
 <% end %>

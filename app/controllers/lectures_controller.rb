@@ -1,5 +1,5 @@
 class LecturesController < ApplicationController
-  before_action :calculate_attendance, only: [:index]
+  # before_action :calculate_attendance, only: [:index]
  	before_action :qr_code, only: [:generate_qr]
   
   def index
