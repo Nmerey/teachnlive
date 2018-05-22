@@ -13,10 +13,8 @@ class LecturesController < ApplicationController
  	end
 
  	def show
-    if current_user
      	@lecture = Lecture.find(params[:id])
       cookies[:exist_lecture] = params[:id]
-    end
   end
 
   def new
