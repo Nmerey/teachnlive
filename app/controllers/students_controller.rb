@@ -17,7 +17,7 @@ class StudentsController < ApplicationController
 	    p authentication
 	    p "============================================"
 	    # if cookies[:lecture] != cookies[:sign_up_lecture]
-	    if authentication.student && cookies[:old_lecture] == cookies[:new_lecture]
+	    if authentication.student && cookies[:old_lecture] == cookies[:exist_lecture] || cookies[:second_lecture] == cookies[:exist_lecture]
 	    	# current = DateTime.now
 	    	# diffrence_in_hours = ((current.to_i - authentication.updated_at.to_i) * 24)
 			    student = authentication.student
@@ -66,7 +66,7 @@ class StudentsController < ApplicationController
 	  	end
 	  	p '============================================'
 	  	p 'cookies '
-	  	p cookies[:lecture]
+	  	p cookies[:old_lecture]
 	  	p '============================================'
 	  	redirect_to '/'
 	end
@@ -75,7 +75,7 @@ class StudentsController < ApplicationController
 		@list_lecture = Lecture.all
 	end
 
-	def sign_up_lecture
+	def sign_up
 		cookies[:new_lecture] = params[:lecture_id]
 		redirect_to "/auth/google_oauth2"
 	end

@@ -14,6 +14,8 @@ class LecturesController < ApplicationController
 
  	def show
    	@lecture = Lecture.find(params[:id])
+    # @attendance = Attendanc
+    cookies[:exist_lecture] = params[:id]
   end
 
   def new
