@@ -44,6 +44,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    animate-rails (1.0.10)
+      rails
     archive-zip (0.11.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
@@ -250,6 +252,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  animate-rails
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.1.0)
   bootstrap3-datetimepicker-rails (~> 4.17.47)

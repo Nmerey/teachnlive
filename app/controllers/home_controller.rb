@@ -3,6 +3,30 @@ class HomeController < ApplicationController
  	def index
  	end
 
+
+ 	def generate_qr_code
+ 		# search for current subject in database
+ 		# code.....
+ 		# generate the link for it 
+ 		@qr = RQRCode::QRCode.new( 'http://github.com/', :size => 4, :level => :h )
+ 	# 	@qrcode = RQRCode::QRCode.new("http://github.com/")
+		# svg = @qrcode.as_svg
+		# # With default options specified explicitly
+		# svg = qrcode.as_svg(
+		# 	offset: 0, color: '000', 
+	 #        shape_rendering: 'crispEdges', 
+  #           module_size: 11
+  #           )
+  		# p @qr
+  # 		@qr = RQRCode::QRCode.new( 'my string to generate', :size => 4, :level => :h )
+		# puts @qr.to_s
+ 		# respond_to do |format|
+ 		# 	format.html
+ 		# 	format.json
+ 		# end
+ 		
+ 	end
+
  	# take the student coordinate
  	#############################################
  	# def student_attend
