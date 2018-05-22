@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <%= stylesheet_link_tag "entry_page" %>
   <title>Sign-UP
   </title>
@@ -10,7 +11,7 @@
 
   <div class="login-page">
     
-    <div class="form">
+    <div class="form animated bounceInDown">
       
       <h3><%= t(".title") %></h3><br>
       <%= form_for @user do |form| %>

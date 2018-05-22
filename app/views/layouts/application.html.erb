@@ -5,7 +5,7 @@
 
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Oswald|Quicksand|Tajawal" rel="stylesheet">
 
-  
+  <%= stylesheet_link_tag 'hover' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
 </head>
@@ -13,9 +13,9 @@
   <div id="header">
     <% if signed_in? -%>
 
-      <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
 
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand mr-5" href="/">
              <img src="/assets/logo.png" width="300" height="60" class="d-inline-block align-top" alt="">
         </a>
 
@@ -25,20 +25,20 @@
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link text-dark" href="#">Link</a>
+            <li class="nav-item" id="first">
+              <a class="nav-link text-white mr-2" href="#">Link</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark" href="#">Disabled</a>
+              <a class="nav-link text-white mr-2" href="#">Disabled</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-dark" href="#">About Us</a>
+              <a class="nav-link text-white mr-2" href="#">About Us</a>
             </li>
           </ul>
 
           <form class="form-inline my-2 my-lg-0">
             <ul class="navbar-nav navbar-expand-lg">
-              <li class="nav-item active pr-3 mt-2 text-dark "><%= current_user.name%></li>
+              <li class="nav-item active pr-3 mt-2 text-white "><%= current_user.name%></li>
             </ul>
             <%= link_to t(".sign_out"),sign_out_path, method: :delete,:class => "btn btn-primary active my-2 my-sm-0" %>
           </form>
