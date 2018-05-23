@@ -1,45 +1,51 @@
+<%= stylesheet_link_tag "entry_page" %>
+
 <style>
-	#cover {
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background: #141526;
-  z-index: 9999;
-  font-size: 65px;
-  text-align: center;
-  padding-top: 200px;
-  color: #fff;
-  font-family:tahoma;
-}
+
+  body {
+    background-image: none;
+    height: 100vh;
+  }
+
+
 </style>
 
-<%= form_for @lecture do |s| %>
 
-  <div class="field">
-    <%= s.label :name %>
-    <%= s.text_field :name %>
+
+<div class="login-page">
+  
+  <div class="form animated bounceIn">
+
+    <div class="container">
+
+      <%= form_for @lecture do |s| %>
+
+      <div class="field">
+    <%= s.text_field :name ,:class => "text-center" ,placeholder: "Name"%>
+      </div>
+
+      <div class="field">
+    <%= s.text_field :subject_name,:class => "text-center",placeholder: "Subject Name" %>
+      </div>
+
+      <div class="field">
+    <%= s.text_field :time,:class => "text-center",placeholder: "Time" %>
+      </div>
+
+
+      <div class="field">
+    <%= s.text_field :user_id,:class => "text-center",placeholder: "User" %>
+      </div>
+
+
+      <button type="submit">
+        Submit
+      </button>
+
+      <% end %>
+    
+     </div>
+    
   </div>
+</div>
 
-  <div class="field">
-    <%= s.label :subject %>
-    <%= s.text_field :subject_name %>
-  </div>
-
-  <div class="field">
-    <%= s.label :time %>
-    <%= s.text_field :time %>
-  </div>
-
-
-  <div class="field">
-    <%= s.label :user_id %>
-    <%= s.text_field :user_id %>
-  </div>
-
-
-  <div class="actions">
-    <%= s.submit %>
-  </div>
-<% end %>

@@ -1,8 +1,5 @@
 class LecturesController < ApplicationController
-<<<<<<< HEAD
 
-=======
->>>>>>> lecture_page
   # before_action :calculate_attendance, only: [:index]
  	before_action :qr_code, only: [:generate_qr]
   

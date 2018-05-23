@@ -2,16 +2,36 @@
 	body {
 		color: white;
 	}
+	th{
+		text-transform: uppercase;
+
+	}
+
+	.maxw{
+		margin-top: 15vh;
+		max-width: 100vh;
+	}
+	h1,h2{
+		font-family: Tajawal;
+		font-size: 6vh;
+		text-align: center;
+		color: white;
+	}
 </style>
+
 <% @attendance.each do |attendance| %>
 <% sid = attendance.student_id %>
 <% @student = Student.find_by(id: sid) %>
-<table>
-	<tr>
-		<th>name</th>
-		<th>atendance</th>
-	</tr>
-	<tr>
+
+
+	<div class="container maxw">
+		<h1>Attendence List</h1>
+		<table class="animated flipInX table table-striped table-dark">
+			<tr>
+				<th>name</th>
+				<th>atendance</th>
+			</tr>
+			<tr>
 		<td><%= @student.first_name %> <%= @student.last_name %></td>
 		<td>
 			<% @x = @student.id %>
@@ -23,7 +43,8 @@
 				Yes
 			<% end %>
 		</td>
-	</tr>
-</table>
+			</tr>
+		</table>
+	</div>
 
 <% end %>

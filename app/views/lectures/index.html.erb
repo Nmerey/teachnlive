@@ -1,11 +1,26 @@
+<style type="text/css">
+	h1,h2{
+		font-family: Tajawal;
+		font-size: 6vh;
+		text-align: center;
+		color: white;
+	}
 
-	<div class="container">
-		 <!-- Lecture name will be dispalyed here -->
-		<h1 id="header">Welcome <%= current_user.name %></h1> 
+	tr th{
+		text-transform: uppercase;
+	}
 
-		<h2 id="headline">Student Attendance</h2>
+</style>
 
-		<table id="attendance" style="width: 100%">
+
+<div class="container mt-5">
+
+	<!-- Lecture name will be dispalyed here -->
+	<h1 id="header">Welcome <%= current_user.name %></h1> 
+
+	<h2 id="headline">Student Attendance</h2>
+
+	<table id="attendance" class="animated flipInX table table-striped table-dark" ">
 			<tr>
 				<th>Lecture's Name</th>
 				<th>Subject</th>
@@ -25,9 +40,6 @@
 				<td><a href="<%= lecture_student_list_path(lec.id) %>">View All Student</a></td>
 			</tr>
 
-			<% end %>
-
-		</table>
-	</div>
-</body>
+			<% end %></table>
+</div>
 

@@ -105,7 +105,9 @@
     <h4 class="preloader-font">Generating Qr Code</h4>
 </div>
 
-<%= raw @get_qr.as_html %>
+<div class="animated fadeIn container mt-5">
+  <%= raw @get_qr.as_html %>
+</div>
 
 <div class="actions">
   <a href= "<%= lectures_path %>">Back</a>
@@ -116,12 +118,7 @@
   crossorigin="anonymous"></script>
 <script>
 
-  // $(window).on('load',
-    // setTimeout($("#preloader").fadeout(), 2000)
-  // $("#preloader").fadeOut();
-  // )
-$('#preloader').delay(2000).fadeOut('fast');
-  // function() {
-  //   $("#preloader").fadeout()
-  // }
+
+$('#preloader').delay(1000).fadeOut('fast');
+
 </script>
