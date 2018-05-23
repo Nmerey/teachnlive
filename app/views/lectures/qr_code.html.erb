@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>QR CODE</title>
+  <title>QR Code</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -35,9 +35,10 @@ canvas {
   opacity: 0.6;
 }
 </style>
+
 <body onload="timer()">
 
-<canvas id="canvas" width="1950px" height="800px"  ></canvas>
+<canvas id="canvas" width="1950px" height="800px"></canvas>
 <canvas id="canvasbg" width="1950px" height="800px"></canvas>
 <style>
   table {
@@ -154,15 +155,21 @@ canvas {
 
 <script>
   // $('#preloader').delay(2000).fadeOut('fast');
-  var preload = document.getElementById('preloader')
-  function timer() {
-    setTimeout(function (){ preload.style.display='none';}, 3000);
-  }
+  var preload = document.getElementById('preloader');
+  console.log(preload);
+  // function timer() {
+    console.log("inside timer function");
+    setTimeout(function(){ preload.style.display='none';}, 2000);
+  // }
 
-  function hide() {
-    // preload.add
-    preload.style.display='none'
-  }
+  // function hide() {
+  //   // preload.add
+  //   preload.style.display='none'
+  // }
+
+
+
+
 </script>
 
 <script>
@@ -355,12 +362,12 @@ Optimizing tips from Benjamin Kästner
 General tips from Salvatore Previti*/
 
 </script>
-<!-- <script
+<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
-<script>
+<!-- <script>
   $('#preloader').delay(2000).fadeOut('fast');
-</script> -->
+</script>-->
 </body>
 </html>
