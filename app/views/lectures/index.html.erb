@@ -1,3 +1,4 @@
+<title>Lectures</title>
 <style type="text/css">
 	h1,h2{
 		font-family: Tajawal;
@@ -16,11 +17,11 @@
 <div class="container mt-5">
 
 	<!-- Lecture name will be dispalyed here -->
-	<h1 id="header">Welcome <%= current_user.name %></h1> 
+	<h1 id="header" style="margin-bottom: 20px">Welcome <%= current_user.name %></h1> 
 
-	<h2 id="headline">Student Attendance</h2>
+	<!-- <h2 id="headline">Student Attendance</h2> -->
 
-	<table id="attendance" class="animated flipInX table table-striped table-dark" ">
+	<table id="attendance" class="animated flipInX table table-striped table-dark text-center" ">
 			<tr>
 				<th>Lecture's Name</th>
 				<th>Subject</th>
@@ -36,8 +37,8 @@
 				<td><%= lec.subject_name %></td>
 				<td><%= Attendance.attendance_count(lec.id) %></td>
 				<td><%= lec.time %></td>
-				<td><a href="<%= lecture_qr_path(lec.id) %>">QR</a></td>
-				<td><a href="<%= lecture_student_list_path(lec.id) %>">View All Student</a></td>
+				<td><a href="<%= lecture_qr_path(lec.id) %>"><i class="fas fa-qrcode"></i><br>QR</a></td>
+				<td><a href="<%= lecture_student_list_path(lec.id) %>"><i class="fas fa-users"></i><br>View Students</a></td>
 			</tr>
 
 			<% end %></table>

@@ -8,7 +8,7 @@ li > a {
   z-index: 1;
 }
 
-li > a:before {
+/*li > a:before {
   content: "";
   position: absolute;
   width: 100%;
@@ -25,4 +25,4 @@ li > a:hover:before,
 li > a:focus:before {
   visibility: visible;
   transform: scaleX(1);
-}
+}*/

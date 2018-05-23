@@ -5,7 +5,6 @@ class LecturesController < ApplicationController
   
   def index
     if current_user
-      # @total = calculate_attendance
    		@lecture = Lecture.all
     else
       flash[:warning] = "You should not Access this page"
@@ -14,10 +13,13 @@ class LecturesController < ApplicationController
  	end
 
  	def show
-
+    if current_user
+      flash[:warning] = "You Should Not Access This Page"
+      return redirect_to lectures_path
+    else
      	@lecture = Lecture.find(params[:id])
       cookies[:exist_lecture] = params[:id]
-
+    end
   end
 
   def new
@@ -32,17 +34,25 @@ class LecturesController < ApplicationController
 
   
   def student_list
-    @lecture = Lecture.find(params[:lecture_id])
-    p @lecture
-    @attendance = Attendance.where("lecture_id = ?", @lecture.id)
+    if current_user
+      @lecture = Lecture.find(params[:lecture_id])
+      @attendance = Attendance.where("lecture_id = ?", @lecture.id)
+    else
+      flash[:danger] = "You Need To Sign In To Access That Page"
+      return redirect_to root_path
+    end
   end
 
 
   def create
-    @lecture = Lecture.new(name: params["lecture"]["name"], user_id: current_user.id, subject_name: params["lecture"]["subject_name"], time: params["lecture"]["time"])
-    @lecture.save
-    flash[:warning] = "Lecture is done saving"
-    redirect_to '/'
+    if current_user
+      @lecture = Lecture.new(name: params["lecture"]["name"], user_id: current_user.id, subject_name: params["lecture"]["subject_name"], time: params["lecture"]["time"])
+      @lecture.save
+      flash[:success] = "Lecture is Created"
+      redirect_to lectures_path
+    else
+      flash[:danger] = "You need to Log In enter That Page"
+    end
   end
 
 
@@ -53,6 +63,7 @@ class LecturesController < ApplicationController
       flash[:warning] = "You should not Access this page"
       redirect_to "/"
     end
+    render :layout => false
   end
 
   private
