@@ -1,5 +1,17 @@
+<div class="container">
 <% @list_lecture.each do |lecture| %>
-<%= lecture.name %>
-
-<a href="<%= lecture_sign_up_path(lecture.id) %>">Sign Up</a><br>
+	<div class="row">
+		<div class="col-4">
+			<h1>
+				<%= lecture.name %>
+			</h1>
+		</div>
+		<div class="col-3">
+			<%= lecture.subject_name %>
+		</div>
+		<div class="col-2">
+			<a href="<%= lecture_sign_up_path(lecture.id) %>">Sign Up</a><br>
+		</div>
+	</div>
 <% end %>
+</div>

@@ -2,10 +2,6 @@
 /*SIGN-UP CSS*/
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-body{
-  background-image: url("entry_background");
-}
-
 .login-page {
   width: 360px;
   padding: 8% 0 0;
