@@ -30,7 +30,7 @@ class StudentsController < ApplicationController
 		      attendance.save
 		      cookies[:second_lecture] = cookies[:new_lecture]
 		      # cookies.delete :new_lecture
-		      flash[:success] = "Successfully Sign Up For the NEw CLass"
+		      flash[:success] = "Successfully Sign Up For the New CLass"
 		      return redirect_to root_path
 		    end
 
@@ -47,12 +47,12 @@ class StudentsController < ApplicationController
 			    else
 			    	attendance.present = true
 			    	attendance.save
-		      		flash[:notice] = "Attendance Taken"
+		      		flash[:success] = "Attendance Taken"
 		      		return redirect_to root_path
 			    end
 			else
-				byebug
-				flash[:warning] =  "Something Wrong with Cookie logic"
+				# byebug
+				flash[:warning] =  "You didn't sign up for this class"
 				return redirect_to root_path
 			end
 	    else
