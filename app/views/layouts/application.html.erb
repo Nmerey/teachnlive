@@ -141,7 +141,6 @@ canvas {
   <% end %>
 </div>
 <div id="header" style="z-index: 2">
-  <% if current_user %>
   <ul class="menu cleafix" style="z-index: 1;left: 40%">
     <li class="parent">
       <a style="display: flex;" href="<%= lectures_path %>">
@@ -158,13 +157,6 @@ canvas {
       </ul>
     </li>
   </ul>
-  <% else %>
-    <a id="menu" style="display: flex;left: 40%;top: 40px" href="<%= root_path %>">
-      <p id="AbsentN" class="text-white">AbsentN</p>
-      <p class="animated bounceInDown" href="/" style="margin-top: 17px">
-        <img src="/assets/logo3.png" width="60" height="60" class="" alt=""></p>
-      <p id="T" class="text-white marr" href="/">T</p>
-    </a>
   <% end %>
       <!-- <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
       <a href="<%= lectures_path %> " class="navbar nav-link">
