@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2018_05_20_084238) do
     t.datetime "updated_at", null: false
     t.datetime "date"
     t.boolean "present", default: false
-    t.integer "lecture_id"
-    t.integer "student_id"
+    t.bigint "lecture_id"
+    t.bigint "student_id"
     t.index ["lecture_id"], name: "index_attendances_on_lecture_id"
     t.index ["student_id"], name: "index_attendances_on_student_id"
   end
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2018_05_20_084238) do
     t.string "provider"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "student_id"
+    t.bigint "student_id"
     t.index ["student_id"], name: "index_authentications_on_student_id"
   end
 
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 2018_05_20_084238) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.integer "user_id"
-    t.integer "student_id"
+    t.bigint "user_id"
+    t.bigint "student_id"
     t.string "subject_name"
     t.date "start_date"
     t.date "end_date"
@@ -73,4 +73,9 @@ ActiveRecord::Schema.define(version: 2018_05_20_084238) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "attendances", "lectures"
+  add_foreign_key "attendances", "students"
+  add_foreign_key "authentications", "students"
+  add_foreign_key "lectures", "students"
+  add_foreign_key "lectures", "users"
 end

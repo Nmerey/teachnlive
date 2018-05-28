@@ -19,18 +19,18 @@
 	}
 </style>
 
-<% @attendance.each do |attendance| %>
-<% sid = attendance.student_id %>
-<% @student = Student.find_by(id: sid) %>
 
 
 	<div class="container maxw">
 		<h1>Attendence List</h1>
 		<table class="animated flipInX table table-striped table-dark">
 			<tr>
-				<th>name</th>
-				<th>atendance</th>
+				<th>Name</th>
+				<th>Atendance</th>
 			</tr>
+<% @attendance.each do |attendance| %>
+	<% sid = attendance.student_id %>
+		<% @student = Student.find_by(id: sid) %>
 			<tr>
 		<td><%= @student.first_name %> <%= @student.last_name %></td>
 		<td>
@@ -38,13 +38,13 @@
 			<% @at = Attendance.find_by(student_id: @x, lecture_id: params[:lecture_id]) %>
 			<% @y = @at.present %>
 			<% if @y == false %>
-				NO
+				Absent
 			<% else %>
-				Yes
+				Present
 			<% end %>
 		</td>
 			</tr>
+<% end %>
 		</table>
 	</div>
 
-<% end %>

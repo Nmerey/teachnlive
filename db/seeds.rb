@@ -5,60 +5,52 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+uid = []
 
-#Seed Student
- student = {}
+2.times do
+  @user = User.new
+  @user.name = Faker::Name.name
+  @user.email = Faker::Internet.free_email
+  @user.password =  "abc"
+  @user.save
 
-ActiveRecord::Base.transaction do
-  50.times do 
-    student['first_name'] = Faker::Name.first_name 
-    student['last_name'] = Faker::Name.last_name
-    student['email'] = Faker::Internet.email
-    student['phone'] = Faker::PhoneNumber.phone_number
-
-
-    Student.create(student)
-  end
-end 
-
-#Seed users
-user = {}
-user['password'] = '1234'
-
-
-ActiveRecord::Base.transaction do
-  10.times do 
-    user['name'] = Faker::Name.name 
-    user['email'] = Faker::Internet.email   
-
-
-    User.create(user)
-  end
-end 
-
-#Seed lectures
-lecture = {}
-
-ActiveRecord::Base.transaction do
-	5.times do
-		lecture['name'] = rand["Morning", "Afternoon", "Night"]
-		lecture['subject_name'] = rand["Chemistry", "Mathematics", "Coding", "Psychology"]
-		lecture['start_date'] = Date.today
-		lecture['end_date'] = Date.forward(120)
-	end
+  uid << @user.id
+  
 end
 
+lecture = []
 
+2.times do
+  @lecture = Lecture.new
+  @lecture.name = Faker::SiliconValley.character
+  @lecture.user_id = uid.sample
+  @lecture.subject_name =  Faker::Science.element
+  @lecture.time = Faker::Time.between(2.days.ago, Date.today, :day)
+  @lecture.save
+  lecture << @lecture.id
+end
 
-#Seed attendances
+100.times do
 
-attendance = {}
+  @student = Student.new
+  @student.first_name = Faker::Name.first_name
+  @student.last_name = Faker::Name.last_name
+  @student.phone = Faker::PhoneNumber.cell_phone
+  @student.email = Faker::Internet.free_email
+  @student.save
+  
+  @auth = Authentication.new
+  @auth.uid = SecureRandom.hex(10)
+  @auth.token = SecureRandom.hex(10)
+  @auth.provider = "google"
+  @auth.student_id = @student.id
+  @auth.save
 
-ActiveRecord::Base.transaction do
-	50.times do
-		attendance['lecture_id'] = rand(1..10)
-		attendance['student_id'] = rand(1..50)
-		attendance['present'] = Faker::Boolean.boolean
+  condition = [true,false]
 
-	end
+  @attendance = Attendance.new
+  @attendance.lecture_id = lecture.sample
+  @attendance.student_id = @student.id
+  @attendance.present = condition.sample
+  @attendance.save
 end
