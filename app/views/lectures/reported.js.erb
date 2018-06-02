@@ -1,0 +1,7 @@
+let absent = document.getElementById('absent')
+let notabsent = document.getElementById('notabsent')
+console.log(absent,notabsent)
+console.log("hi")
+console.log("<%= @absent %>","<%= @notabsent %>")
+absent.innerHTML = "<%= @absent %> present"
+notabsent.innerHTML = "<%= @notabsent %> absent"

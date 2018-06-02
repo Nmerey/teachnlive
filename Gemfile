@@ -46,10 +46,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'capistrano', '~> 3.7', '>= 3.7.1'
-  gem 'capistrano-rails', '~> 1.2'
-  gem 'capistrano-passenger', '~> 0.2.0'
-  gem 'capistrano-rbenv', '~> 2.1'
 end
 
 group :test do
@@ -67,7 +63,7 @@ gem 'omniauth-google-oauth2'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.1.0'
 gem "figaro"
-gem 'carrierwave', '~> 1.0'
+# gem 'carrierwave', '~> 1.0'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'omniauth-facebook'
