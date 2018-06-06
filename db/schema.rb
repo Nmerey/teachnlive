@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_20_084238) do
+ActiveRecord::Schema.define(version: 2018_06_02_060951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2018_05_20_084238) do
   create_table "attendances", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "date"
     t.boolean "present", default: false
     t.bigint "lecture_id"
     t.bigint "student_id"
@@ -41,12 +40,8 @@ ActiveRecord::Schema.define(version: 2018_05_20_084238) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.bigint "user_id"
-    t.bigint "student_id"
     t.string "subject_name"
-    t.date "start_date"
-    t.date "end_date"
     t.string "time"
-    t.index ["student_id"], name: "index_lectures_on_student_id"
     t.index ["user_id"], name: "index_lectures_on_user_id"
   end
 
@@ -76,6 +71,5 @@ ActiveRecord::Schema.define(version: 2018_05_20_084238) do
   add_foreign_key "attendances", "lectures"
   add_foreign_key "attendances", "students"
   add_foreign_key "authentications", "students"
-  add_foreign_key "lectures", "students"
   add_foreign_key "lectures", "users"
 end

@@ -1,0 +1,21 @@
+<style>
+	body{
+		color: white !important;
+	}
+</style>
+<h1>hihhiih</h1>
+<% @x.each do |y| %>
+	<h1><%= y %></h1>
+<% end %>
+
+<%= form_with(url: '/date') do |x|%>
+	<label>From</label>
+	<%= x.date_field :start %>
+	<label>To</label>
+	<%= x.date_field :end %>
+	<%= x.submit :submit %>
+<% end %>
+<div id="fuckoff">
+	<h1 id="absent"></h1>
+	<h1 id="notabsent"></h1>
+</div>

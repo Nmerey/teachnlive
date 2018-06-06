@@ -18,7 +18,7 @@ class LecturesController < ApplicationController
       return redirect_to lectures_path
     else
      	@lecture = Lecture.find(params[:id])
-      cookies[:exist_lecture] = params[:id]
+      cookies[:lecture] = params[:id]
     end
   end
 
@@ -46,7 +46,7 @@ class LecturesController < ApplicationController
 
   def create
     if current_user
-      @lecture = Lecture.new(name: params["lecture"]["name"], user_id: current_user.id, subject_name: params["lecture"]["subject_name"], time: params["lecture"]["time"])
+      @lecture = Lecture.new(name: params["lecture"]["name"], user_id: current_user.id, subject_name: params["lecture"]["subject_name"])
       @lecture.save
       flash[:success] = "Lecture is Created"
       redirect_to lectures_path
@@ -55,7 +55,16 @@ class LecturesController < ApplicationController
     end
   end
 
+  def new_student
+  end
 
+  def create_student
+    byebug
+    @temp_student = Student.create(email: params[])
+    flash[:success] = "Student Created"
+    redirect_to lectures_path
+  end
+  # use to generate qr code
   def qr_code
     if current_user
       @get_qr = generate_qr  
@@ -66,19 +75,36 @@ class LecturesController < ApplicationController
     render :layout => false
   end
 
+  def dashboard
+    now = Date.current
+    @x = Attendance.where('DATE(updated_at) = ?', now)
+  end
+
+  def reported
+    @absent = 0
+    @notabsent = 0
+    @start = params[:start]
+    @end = params[:end]
+    p "============================================="
+    range = (@end.to_date - @start.to_date ).to_i + 1
+    p range
+    (@start..@end).each do |date|
+    p "============================================="
+      @attendance = Attendance.where('DATE(updated_at) = ?', date)
+      @attendance.each do |x|
+        if x.present == true
+          @notabsent += 1
+        else
+          @absent += 1
+        end
+      end
+      p date
+    end
+      p @absent
+      p @notabsent
+  end
+
   private
-
-
-  # def calculate_attendance
-  #   uid = current_user.id
-  #   @lecture = Lecture.where('user_id = ?', uid)
-  #   @lecture.each do |x|
-  #   @calc_attendance = Attendance.where("present = ? AND lecture_id = ?", true, @lecture.id)
-  #   p @calc_attendance
-  #   @total = @calc_attendance.count
-  #   return @total
-  # end
-
 
   def set_lecture
       @lecture = Lecture.find(params[:id])
@@ -95,16 +121,4 @@ class LecturesController < ApplicationController
     @qr = RQRCode::QRCode.new("#{@link}")
     return @qr
   end
-
-  # def late_check
-  #   uid = current_user.id
-  #   @lecture = Lecture.find(params[:id])
-  #   @late = Attendance.where("present = ?", true)
-  #   @late.each do |obj|
-  #     if obj.created_at <= @lectures.start_time
-  #       # student
-  #     end
-  #   end  
-  # end
-
 end
