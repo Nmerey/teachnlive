@@ -93,7 +93,7 @@ class LecturesController < ApplicationController
     range = (@end.to_date - @start.to_date ).to_i + 1
     p range
     (@start..@end).each do |date|
-      @attendance = Attendance.where('DATE(updated_at) = ? AND lecture_id = ?', date)
+      @attendance = Attendance.where('DATE(updated_at) = ? AND lecture_id = ?', date, params[:lecture_id])
       @attendance.each do |x|
         if x.present == true
           @notabsent += 1

@@ -1,36 +1,38 @@
 <style>
+	.haha{
+		text-align: center;
+		color: white
+	}
 </style>
 
-<%= form_with(url: '/date') do |x|%>
+<%= form_with(url: '/date',class: "haha") do |x|%>
 	<label>From</label>
 	<%= x.date_field :start %>
-	<label>To</label>
+	<label style="margin-left: 15px">To</label>
 	<%= x.date_field :end %>
-	<%= x.select("person_id", Person.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'None'}) %>
-	<%= x.lecture_id :end %>
-	<%= x.submit :submit %>
+	<%= x.select("lecture_id", Lecture.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'None'},style: "margin-left: 15px") %>
+	<%= x.submit :submit,class:'btn' %>
 <% end %>
 <div>
 	<h1 id="absent"></h1>
 	<h1 id="notabsent"></h1>
 </div>
-<div>
+<div id="shit">
 	<canvas id="myChart" style="position: relative; height:40vh; width:70vw"></canvas>
 </div>
+	<canvas id="reportChart" style="position: relative; height:40vh; width:70vw"></canvas>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
 	<script>
 	var ctx = document.getElementById("myChart").getContext('2d');
 	let bar_label = '<%= @lecture_name %>'.split(";,")
-	// let bar_label = <%= @lecture_name %>
 	let data_total = <%= @data %>
 	
 			var myChart = new Chart(ctx, {
 			    type: 'bar',
 			    data: {
-			        // labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
 			        labels: bar_label,
 			        datasets: [{
-			            label: 'Total Student',
+			            label: 'Total Student Absent',
 			            data: data_total,
 			            backgroundColor: 
 			                'rgba(215, 215, 193,0.2)'
@@ -42,6 +44,7 @@
 			        },
 			        // {
 			        //     label: 'Total Student Present',
+			        //     data: data_total,
 			        //     backgroundColor: 
 			        //         'rgba(204, 242, 255,1)'
 			        //     ,
