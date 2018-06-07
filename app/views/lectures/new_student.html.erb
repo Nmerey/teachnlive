@@ -1,6 +1,11 @@
-<%= form_with(url: '/create_student') do |s| %>
+<style>
+	.fucker{
+		text-align: center;
+	}
+</style>
+<%= form_with(url: '/create_student',class: "fucker") do |s| %>
 	<div class="field">
 		<%= s.email_field :email ,:class => "text-center" ,placeholder: "Email"%>
 	</div>
-	<button type="submit">Create</button>
+	<button type="submit" style="margin-top: 15px">Create</button>
 <% end %>
