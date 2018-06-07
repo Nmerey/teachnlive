@@ -59,8 +59,7 @@ class LecturesController < ApplicationController
   end
 
   def create_student
-    byebug
-    @temp_student = Student.create(email: params[])
+    @temp_student = Student.create(email: params[:email])
     flash[:success] = "Student Created"
     redirect_to lectures_path
   end
@@ -78,6 +77,12 @@ class LecturesController < ApplicationController
   def dashboard
     now = Date.current
     @x = Attendance.where('DATE(updated_at) = ?', now)
+    @lecture_name = []
+    @data = []
+    Lecture.all.each do |lecture|
+      @lecture_name << lecture.name
+      @data << Attendance.where("lecture_id = ?",lecture.id).count
+    end
   end
 
   def reported
@@ -85,12 +90,10 @@ class LecturesController < ApplicationController
     @notabsent = 0
     @start = params[:start]
     @end = params[:end]
-    p "============================================="
     range = (@end.to_date - @start.to_date ).to_i + 1
     p range
     (@start..@end).each do |date|
-    p "============================================="
-      @attendance = Attendance.where('DATE(updated_at) = ?', date)
+      @attendance = Attendance.where('DATE(updated_at) = ? AND lecture_id = ?', date)
       @attendance.each do |x|
         if x.present == true
           @notabsent += 1
@@ -98,10 +101,7 @@ class LecturesController < ApplicationController
           @absent += 1
         end
       end
-      p date
     end
-      p @absent
-      p @notabsent
   end
 
   private

@@ -1,8 +1,13 @@
 
 # ===============================================
 # Replace 127.0.0.1 with your server's IP address!
-server '209.97.162.52', user: 'root', roles: %w{app db web}
-
+server '209.97.160.26', user: 'root', roles: %w{app db web},
+  ssh_options: {
+    # user: "user_name", # overrides user setting above
+    keys: %w(~/.ssh/server),
+    # forward_agent: false,
+    # auth_methods: %w(publickey password)
+  }
 
 
 # server-based syntax

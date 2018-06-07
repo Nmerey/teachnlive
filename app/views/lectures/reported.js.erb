@@ -1,7 +1,51 @@
-let absent = document.getElementById('absent')
-let notabsent = document.getElementById('notabsent')
-console.log(absent,notabsent)
-console.log("hi")
+// let absent = document.getElementById('absent')
+// let notabsent = document.getElementById('notabsent')
+// console.log(absent,notabsent)
+// console.log("hi")
+myChart.destroy();
 console.log("<%= @absent %>","<%= @notabsent %>")
+absent.innerHTML = ''
+notabsent.innerHTML = ''
 absent.innerHTML = "<%= @absent %> present"
 notabsent.innerHTML = "<%= @notabsent %> absent"
+
+var ctx = document.getElementById("myChart").getContext('2d');
+	x = '<%= @lecture_name %>'
+	bar_label = '<%= @lecture_name %>'.split(";,")
+	// let bar_label = <%= @lecture_name %>
+	data_total = '<%= @data %>'
+			var receiveChart = new Chart(ctx, {
+			    type: 'bar',
+			    data: {
+			        // labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+			        labels: bar_label,
+			        datasets: [{
+			            label: [
+			            	'Total Student',
+			            ],
+			            data: data_total,
+			            backgroundColor: 
+			                'rgba(215, 215, 193,0.2)'
+			            ,
+			            borderColor: 
+			                'rgba(195, 195, 162,1)'
+			            ,
+			            borderWidth: 1
+			        },
+			        ]
+			    },
+			    options: {
+			        scales: {
+
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero:true
+			                },
+			                gridLines: {
+			                    display: true,
+			                    color: 'rgba(235, 235, 224, 0.1)'
+		                	},
+			            }],
+			        }
+			    }
+			});

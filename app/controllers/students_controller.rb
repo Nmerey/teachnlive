@@ -75,6 +75,7 @@ class StudentsController < ApplicationController
  	  		@student = Student.create_with_auth_and_hash(authentication, auth_hash)
  	  		@attendance = Attendance.create(lecture_id: cookies[:lecture].to_i, student_id: authentication.student_id,present: true)
 	  	end
+	  	redirect_to root_path
 	end
 
 	def new_student

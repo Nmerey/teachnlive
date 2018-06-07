@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 uid = []
 
 2.times do
@@ -30,6 +31,8 @@ lecture = []
   lecture << @lecture.id
 end
 
+aid = []
+
 100.times do
 
   @student = Student.new
@@ -53,4 +56,17 @@ end
   @attendance.student_id = @student.id
   @attendance.present = condition.sample
   @attendance.save
+  aid << @attendance.id
+end
+
+date = [Date.current - 6.days,Date.current - 1.days,Date.current - 2.days,Date.current - 3.days,Date.current - 4.days,Date.current - 5.days,Date.current - 7.days]
+
+7.times do
+  p date.sample
+end
+
+aid.each do |x|
+  y = Attendance.find(x)
+  y.updated_at = date.sample
+  y.save
 end

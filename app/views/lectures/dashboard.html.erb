@@ -1,21 +1,74 @@
 <style>
-	body{
-		color: white !important;
-	}
 </style>
-<h1>hihhiih</h1>
-<% @x.each do |y| %>
-	<h1><%= y %></h1>
-<% end %>
 
 <%= form_with(url: '/date') do |x|%>
 	<label>From</label>
 	<%= x.date_field :start %>
 	<label>To</label>
 	<%= x.date_field :end %>
+	<%= x.select("person_id", Person.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'None'}) %>
+	<%= x.lecture_id :end %>
 	<%= x.submit :submit %>
 <% end %>
-<div id="fuckoff">
+<div>
 	<h1 id="absent"></h1>
 	<h1 id="notabsent"></h1>
 </div>
+<div>
+	<canvas id="myChart" style="position: relative; height:40vh; width:70vw"></canvas>
+</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+	<script>
+	var ctx = document.getElementById("myChart").getContext('2d');
+	let bar_label = '<%= @lecture_name %>'.split(";,")
+	// let bar_label = <%= @lecture_name %>
+	let data_total = <%= @data %>
+	
+			var myChart = new Chart(ctx, {
+			    type: 'bar',
+			    data: {
+			        // labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+			        labels: bar_label,
+			        datasets: [{
+			            label: 'Total Student',
+			            data: data_total,
+			            backgroundColor: 
+			                'rgba(215, 215, 193,0.2)'
+			            ,
+			            borderColor: 
+			                'rgba(195, 195, 162,1)'
+			            ,
+			            borderWidth: 1
+			        },
+			        // {
+			        //     label: 'Total Student Present',
+			        //     backgroundColor: 
+			        //         'rgba(204, 242, 255,1)'
+			        //     ,
+			        //     borderColor: 
+			        //         'rgba(204, 242, 255,0.2)'
+			            
+			        // }
+			        ]
+			    },
+			    options: {
+			        scales: {
+
+			            yAxes: [{
+			                ticks: {
+			                    beginAtZero:true
+			                },
+			                gridLines: {
+			                    display: true,
+			                    color: 'rgba(235, 235, 224, 0.1)'
+		                	},
+			            }],
+			        }
+			    }
+			});
+	</script>
+<script>
+
+	let absent = document.getElementById('absent')
+	let notabsent = document.getElementById('notabsent')
+</script>
