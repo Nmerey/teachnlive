@@ -13,13 +13,13 @@ class LecturesController < ApplicationController
  	end
 
  	def show
-    if current_user
-      flash[:warning] = "You Should Not Access This Page"
-      return redirect_to lectures_path
-    else
+    # if current_user
+    #   flash[:warning] = "You Should Not Access This Page"
+    #   return redirect_to lectures_path
+    # else
      	@lecture = Lecture.find(params[:id])
       cookies[:lecture] = params[:id]
-    end
+    # end
   end
 
   def new
@@ -115,7 +115,7 @@ class LecturesController < ApplicationController
     uid = current_user.id
     @lecture = Lecture.find(params[:lecture_id])
     # change domain name after deployment because we are using localhost for now
-    @domain = 'http://localhost:3000/'
+    @domain = 'https://36ff7cb1.ngrok.io/'
     @param = "lectures/#{@lecture.id.to_i}"
     @link = @domain + @param 
     @qr = RQRCode::QRCode.new("#{@link}")
