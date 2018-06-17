@@ -1,0 +1,55 @@
+// let absent = document.getElementById('absent')
+// let notabsent = document.getElementById('notabsent')
+// console.log(absent,notabsent)
+// console.log("hi")
+myChart.destroy();
+console.log("<%= @absent %>","<%= @notabsent %>")
+// absent.innerHTML = ''
+// notabsent.innerHTML = ''
+// absent.innerHTML = "<%= @absent %> present"
+// notabsent.innerHTML = "<%= @notabsent %> absent"
+
+var canvas = document.getElementById("reportChart").getContext('2d');
+var bla = document.getElementById("shit");
+bla.style.display='none';
+ab = <%= @absent %>;
+// let ba = '<%= @notabsent %>'
+z = <%= @notabsent %>;
+function chart() {
+	var myChart = new Chart(canvas, {
+	    type: 'bar',
+	    data: {
+	        // labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+	        labels: ['Absent','Present'],
+	        datasets: [{
+	            label: [
+	            	'Total Student',
+	            ],
+	            data: [ab,z],
+	            backgroundColor: 
+	                'rgba(215, 215, 193,0.2)'
+	            ,
+	            borderColor: 
+	                'rgba(195, 195, 162,1)'
+	            ,
+	            borderWidth: 1
+	        },
+	        ]
+	    },
+	    options: {
+	        scales: {
+
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                },
+	                gridLines: {
+	                    display: true,
+	                    color: 'rgba(235, 235, 224, 0.1)'
+	            	},
+	            }],
+	        }
+	    }
+	});
+}
+chart()

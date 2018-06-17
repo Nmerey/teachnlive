@@ -25,7 +25,7 @@
 
 	<div class="container table-width">
 		<h1>Attendence List</h1>
-		<table class="animated fadeIn table table-striped table-dark">
+		<table id="student-list" class="animated fadeIn table table-striped table-dark">
 			<tr>
 				<th>Name</th>
 				<th>Atendance</th>
@@ -49,4 +49,49 @@
 <% end %>
 		</table>
 	</div>
+<iframe id="txtArea1" style="display:none"></iframe>
+<button id="btnExport" onclick="fnExcelReport();"> EXPORT </button>
+<script>
+	function fnExcelReport()
+{
+    var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+    var textRange; var j=0;
+    tab = document.getElementById('student-list');
 
+    for(j = 0 ; j < tab.rows.length ; j++) 
+    {     
+        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+        
+    }
+
+    tab_text=tab_text+"</table>";
+    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");
+    tab_text= tab_text.replace(/<img[^>]*>/gi,""); 
+    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, "");
+
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE "); 
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))
+    {
+        txtArea1.document.open("txt/html","replace");
+        txtArea1.document.write(tab_text);
+        txtArea1.document.close();
+        txtArea1.focus(); 
+        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+    }  
+    else
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+    return (sa);
+}
+</script>
+
+<!-- <script>
+	$("#btnExport").click(function () {
+        $("#student-list").btechco_excelexport({
+            containerid: "student-list"
+           , datatype: $datatype.Table
+        });
+    });
+</script> -->

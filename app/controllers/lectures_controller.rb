@@ -4,8 +4,12 @@ class LecturesController < ApplicationController
  	before_action :qr_code, only: [:generate_qr]
   
   def index
+    if current_user.roles == 'admin'
+      redirect_to '/admin'
+    end
+
     if current_user
-   		@lecture = Lecture.all
+      @lecture = Lecture.where('user_id = ?',current_user.id)
     else
       flash[:warning] = "You should not Access this page"
       redirect_to '/'
@@ -43,7 +47,6 @@ class LecturesController < ApplicationController
     end
   end
 
-
   def create
     if current_user
       @lecture = Lecture.new(name: params["lecture"]["name"], user_id: current_user.id, subject_name: params["lecture"]["subject_name"])
@@ -72,36 +75,6 @@ class LecturesController < ApplicationController
       redirect_to "/"
     end
     render :layout => false
-  end
-
-  def dashboard
-    now = Date.current
-    @x = Attendance.where('DATE(updated_at) = ?', now)
-    @lecture_name = []
-    @data = []
-    Lecture.all.each do |lecture|
-      @lecture_name << lecture.name
-      @data << Attendance.where("lecture_id = ?",lecture.id).count
-    end
-  end
-
-  def reported
-    @absent = 0
-    @notabsent = 0
-    @start = params[:start]
-    @end = params[:end]
-    range = (@end.to_date - @start.to_date ).to_i + 1
-    p range
-    (@start..@end).each do |date|
-      @attendance = Attendance.where('DATE(updated_at) = ? AND lecture_id = ?', date, params[:lecture_id])
-      @attendance.each do |x|
-        if x.present == true
-          @notabsent += 1
-        else
-          @absent += 1
-        end
-      end
-    end
   end
 
   private
